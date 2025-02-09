@@ -70,6 +70,7 @@ var movable: bool = true
 func _ready() -> void:
 	capture_mouse(true)
 	
+	Grabpack.reset_objects()
 	sound_manager.load_soundpack("Grass")
 
 func _unhandled_input(event: InputEvent) -> void:

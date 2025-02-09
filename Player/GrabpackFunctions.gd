@@ -6,7 +6,7 @@ var left_hand: Node3D = null
 var right_hand: Node3D = null
 var item_raycast: RayCast3D = null
 
-func _ready():
+func reset_objects():
 	grabpack = get_tree().get_first_node_in_group("Grabpack")
 	player = get_tree().get_first_node_in_group("Player")
 	
@@ -20,6 +20,8 @@ func player_jump(height: float):
 	player.external_jump(height)
 func set_movable(value: bool):
 	player.movable = value
+func kill_player(_use_messages: bool = false):
+	get_tree().reload_current_scene()
 
 func lower_grabpack():
 	grabpack.lower_grabpack()

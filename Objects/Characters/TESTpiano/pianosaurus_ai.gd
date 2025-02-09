@@ -5,6 +5,7 @@ var speed: float = 8.0
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player = $pianosaurusmodel/AnimationPlayer
 @onready var timer = $Timer
+@onready var jumpscare_camera = $JumpscareCamera
 
 var enabled: bool = false
 var chasing: bool = false
@@ -51,12 +52,23 @@ func _update_target_location(target_location):
 	nav_agent.target_position = target_location
 
 func _on_navigation_agent_3d_navigation_finished():
-	animation_player.play("Piano_NewIdle")
-	enabled = false
-	chasing = false
-	point = null
-	timer.start()
+	if enabled:
+		animation_player.play("Piano_NewIdle")
+		enabled = false
+		chasing = false
+		point = null
+		timer.start()
 
 func _on_timer_timeout():
 	animation_player.play("Piano_RunLoop")
 	enabled = true
+
+func _on_event_trigger_triggered():
+	CameraTransition.transition_camera(Grabpack.player.camera, jumpscare_camera, 0.25)
+	animation_player.play("Piano_Jumpscare")
+	enabled = false
+	timer.stop()
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "Piano_Jumpscare":
+		Grabpack.kill_player(true)
