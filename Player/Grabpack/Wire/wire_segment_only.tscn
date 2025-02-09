@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2vtm74n4vyfl"]
+
+[ext_resource type="Script" uid="uid://sa3jexhyqkax" path="res://Player/Grabpack/Wire/wire_segment_only.gd" id="1_ac2ak"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ac2ak"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ac2ak"]
+material = SubResource("StandardMaterial3D_ac2ak")
+top_radius = 0.03
+bottom_radius = 0.016
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ac2ak"]
+height = 1.0
+radius = 0.0410156
+
+[node name="WireSegmentOnly" type="Area3D"]
+script = ExtResource("1_ac2ak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
+mesh = SubResource("CylinderMesh_ac2ak")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
+shape = SubResource("CylinderShape3D_ac2ak")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.02
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

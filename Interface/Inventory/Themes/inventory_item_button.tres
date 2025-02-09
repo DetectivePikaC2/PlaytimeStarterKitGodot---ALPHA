@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://672wjbmdmkw1"]
+
+[ext_resource type="FontFile" uid="uid://dp3oq0ou16joq" path="res://Interface/Font/VCR_OSD_MONO_1.001.ttf" id="1_3aomm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3aomm"]
+content_margin_left = 14.0
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.717647, 0.717647, 0.717647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssprt"]
+content_margin_left = 14.0
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.717647, 0.717647, 0.717647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy2c7"]
+content_margin_left = 14.0
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ybym"]
+content_margin_left = 14.0
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.717647, 0.717647, 0.717647, 1)
+
+[resource]
+default_font = ExtResource("1_3aomm")
+Button/styles/focus = SubResource("StyleBoxFlat_3aomm")
+Button/styles/hover = SubResource("StyleBoxFlat_ssprt")
+Button/styles/normal = SubResource("StyleBoxFlat_wy2c7")
+Button/styles/pressed = SubResource("StyleBoxFlat_8ybym")

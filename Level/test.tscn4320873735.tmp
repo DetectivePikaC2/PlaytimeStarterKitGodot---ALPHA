@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://db7hg6cct3iu0"]
+
+[ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
+[ext_resource type="Script" path="res://Player/Sound/Movement/footstep_sound.gd" id="1_bt7lf"]
+[ext_resource type="PackedScene" uid="uid://dq3pqg6x1byr3" path="res://Player/Grabpack/Hands/none.tscn" id="2_m4k5q"]
+[ext_resource type="PackedScene" uid="uid://dlrkwthm6js8e" path="res://Player/Grabpack/Hands/red.tscn" id="3_qsrvc"]
+[ext_resource type="PackedScene" uid="uid://xmerc1mcwygl" path="res://Player/Grabpack/Hands/green.tscn" id="4_bt7lf"]
+[ext_resource type="PackedScene" uid="uid://5xwl88xktvuo" path="res://Player/Grabpack/Hands/flare.tscn" id="5_qsrvc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_efwbx"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_4sme4"]
+sky_material = SubResource("ProceduralSkyMaterial_efwbx")
+
+[sub_resource type="Environment" id="Environment_trpv2"]
+background_mode = 2
+sky = SubResource("Sky_4sme4")
+tonemap_mode = 2
+glow_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsrvc"]
+albedo_color = Color(0, 0.4224, 7.70092e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt7lf"]
+albedo_color = Color(0.28745, 0.100329, 0, 1)
+
+[node name="test" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_trpv2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 9.35)
+use_collision = true
+size = Vector3(20.9, 0.6, 43.1)
+
+[node name="FootStepSurface" type="Node" parent="CSGBox3D"]
+script = ExtResource("1_bt7lf")
+metadata/_custom_type_script = ExtResource("1_bt7lf")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, -0.2, -1.2)
+use_collision = true
+size = Vector3(21.4, 0.6, 22)
+material = SubResource("StandardMaterial3D_qsrvc")
+
+[node name="FootStepSurface" type="Node" parent="CSGBox3D8"]
+script = ExtResource("1_bt7lf")
+surface = 3
+metadata/_custom_type_script = ExtResource("1_bt7lf")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, -0.2, 20.7)
+use_collision = true
+size = Vector3(21.4, 0.6, 22)
+material = SubResource("StandardMaterial3D_bt7lf")
+
+[node name="FootStepSurface" type="Node" parent="CSGBox3D9"]
+script = ExtResource("1_bt7lf")
+surface = 4
+metadata/_custom_type_script = ExtResource("1_bt7lf")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0999985, 4.05, 21.6)
+use_collision = true
+size = Vector3(20.7, 9.1, 24.4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, -5.9)
+operation = 2
+size = Vector3(3, 4.6, 12.8)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.25, 1.2, 0)
+use_collision = true
+size = Vector3(4.4, 3.2, 10.5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+operation = 2
+size = Vector3(1.6, 1.8, 11.7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 0.35, -2.15)
+use_collision = true
+size = Vector3(4.4, 1.5, 5.3)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7, 0.35, -2.15)
+use_collision = true
+size = Vector3(5.3, 1.5, 5.3)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.6, 0.35, -2.15)
+use_collision = true
+size = Vector3(5.3, 1.5, 5.3)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.6, 0.35, 5.35)
+use_collision = true
+size = Vector3(5.3, 1.5, 5.3)
+
+[node name="Player" parent="." instance=ExtResource("1_4sme4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+enabled_hands = Array[PackedScene]([ExtResource("2_m4k5q"), ExtResource("3_qsrvc"), ExtResource("4_bt7lf"), ExtResource("5_qsrvc")])
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 20.3)

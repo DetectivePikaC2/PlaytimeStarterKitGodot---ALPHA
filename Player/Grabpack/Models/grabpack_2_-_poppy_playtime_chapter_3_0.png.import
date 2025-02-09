@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://0kl0t0wqy0y3"
+path.s3tc="res://.godot/imported/grabpack_2_-_poppy_playtime_chapter_3_0.png-65915b546ef17bb636b9882bfd5746b6.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "25f6ef9350186a32f5c080b6332df85f"
+}
+
+[deps]
+
+source_file="res://Player/Grabpack/Models/grabpack_2_-_poppy_playtime_chapter_3_0.png"
+dest_files=["res://.godot/imported/grabpack_2_-_poppy_playtime_chapter_3_0.png-65915b546ef17bb636b9882bfd5746b6.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

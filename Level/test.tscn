@@ -1,0 +1,405 @@
+[gd_scene load_steps=31 format=3 uid="uid://db7hg6cct3iu0"]
+
+[ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
+[ext_resource type="Script" uid="uid://dka7ua0ef5uqh" path="res://Level/Scripts/test.gd" id="1_ndeqo"]
+[ext_resource type="PackedScene" uid="uid://dlrkwthm6js8e" path="res://Player/Grabpack/Hands/red.tscn" id="3_ndeqo"]
+[ext_resource type="PackedScene" uid="uid://xmerc1mcwygl" path="res://Player/Grabpack/Hands/green.tscn" id="4_bt7lf"]
+[ext_resource type="PackedScene" uid="uid://dd7igduoonl0g" path="res://Player/Grabpack/Hands/omni.tscn" id="4_d204d"]
+[ext_resource type="PackedScene" uid="uid://5xwl88xktvuo" path="res://Player/Grabpack/Hands/flare.tscn" id="4_m4k5q"]
+[ext_resource type="PackedScene" uid="uid://nkvm74l6uu31" path="res://Player/Grabpack/Hands/purple.tscn" id="5_381eo"]
+[ext_resource type="Script" uid="uid://cdq5mvwwuoy86" path="res://Objects/Gameplay/squeeze_zone.gd" id="5_qsrvc"]
+[ext_resource type="PackedScene" uid="uid://wdaboct67o3v" path="res://Objects/Gameplay/HandFunctions/JumpPad/jump_pad.tscn" id="8_4y3vx"]
+[ext_resource type="PackedScene" uid="uid://cnbespf6ukkje" path="res://Objects/Gameplay/VHS/vhs_tape.tscn" id="11_jc4vw"]
+[ext_resource type="PackedScene" uid="uid://pcbe4d8vixhy" path="res://Objects/Gameplay/Puzzles/Battery/battery.tscn" id="11_sh2tj"]
+[ext_resource type="PackedScene" uid="uid://rfnlwudwu2cl" path="res://Objects/Gameplay/Puzzles/Battery/battery_holder.tscn" id="12_5gusw"]
+[ext_resource type="PackedScene" uid="uid://djg3e1ib11hpi" path="res://Objects/Gameplay/VHS/vhs_player.tscn" id="12_yi5ob"]
+[ext_resource type="Script" uid="uid://dhjsvwgpbf3bx" path="res://Objects/Gameplay/event_trigger.gd" id="13_5gusw"]
+[ext_resource type="PackedScene" uid="uid://nki7jml0otrb" path="res://Objects/Gameplay/VHS/vhs_tv.tscn" id="13_dnuk6"]
+[ext_resource type="VideoStream" uid="uid://dtl0wkh0at5ua" path="res://Interface/Video/FlareHand_VHS.ogv" id="17_bgkgm"]
+[ext_resource type="PackedScene" uid="uid://ws7ipvyjmavq" path="res://Objects/Characters/TESTpiano/piano_saurus.tscn" id="18_sh2tj"]
+[ext_resource type="AudioStream" uid="uid://7lgjgn0ix3r" path="res://Objects/Characters/TESTpiano/sfx/12_Last_Meal.wav" id="20_uqwnt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_efwbx"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_4sme4"]
+sky_material = SubResource("ProceduralSkyMaterial_efwbx")
+
+[sub_resource type="Environment" id="Environment_trpv2"]
+background_mode = 2
+sky = SubResource("Sky_4sme4")
+tonemap_mode = 2
+glow_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m4k5q"]
+size = Vector3(3.1, 2.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqwnt"]
+size = Vector3(1, 2.2, 7.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5gusw"]
+size = Vector3(1, 2.2, 4.2)
+
+[sub_resource type="Animation" id="Animation_sh2tj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("door1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(12.1, 1.7, -5.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("door3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(12.1, 1.7, -3.35)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(7.515, 2, -4.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PianoSaurus:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(10.5, 0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_5gusw"]
+resource_name = "move"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PianoSaurus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(10.5, 0, -4), Vector3(7.3, 0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_bgkgm"]
+resource_name = "open"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("door1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.10667, 3.5, 3.57333, 3.66666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(12.1, 1.7, -5.25), Vector3(12.1, 1.7, -5.55), Vector3(12.1, 1.7, -5.55), Vector3(12.1, 1.7, -6.61669), Vector3(12.1, 1.7, -6.58887), Vector3(12.1, 1.7, -6.61669)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("door3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.12, 3.5, 3.58, 3.67),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(12.1, 1.7, -3.35), Vector3(12.1, 1.7, -2.35), Vector3(12.1, 1.7, -2.30849), Vector3(12.1, 1.7, -1.97246), Vector3(12.1, 1.7, -2.004), Vector3(12.1, 1.7, -1.97246)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(7.515, 2, -4.5), Vector3(7.19, 2, -4.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_dino_reveal"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gusw"]
+_data = {
+&"RESET": SubResource("Animation_sh2tj"),
+&"move": SubResource("Animation_5gusw"),
+&"open": SubResource("Animation_bgkgm")
+}
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_dasq6"]
+vertices = PackedVector3Array(-6.75, 0.25, -9.1, -4.75, 0.25, -9.1, -4.75, 0.25, -10.35, -14, 0.25, -10.35, -4.75, 0.25, 4.65, -4.75, 0.25, 0.150001, -6.75, 0.25, 0.150001, -7.25, 0.25, -0.349999, -14, 0.25, 4.65, -7.25, 0.25, -8.6, -2.75, 0.25, -9.1, -2.25, 0.25, -8.6, -2.25, 0.25, -0.599999, 0.249999, 0.25, -0.599999, 0.249999, 0.25, -8.6, 0.749999, 0.25, -9.1, 11.25, 0.25, -9.1, 11.25, 0.25, -10.35, 12.75, 5.35, -9.85, 12.75, 5.35, -0.0999994, 14.75, 5.35, -0.0999994, 14.75, 5.35, -9.85, 13, 0.25, -9.6, 13, 0.25, -0.349999, 14.5, 0.25, -0.349999, 14.5, 0.25, -9.6, -5.75, 5.2, -7.6, -5.75, 5.2, -1.35, -3.75, 5.2, -1.35, -3.75, 5.2, -7.6, 1.75, 5.35, -7.6, 1.75, 5.35, -1.1, 3.75, 5.35, -1.1, 3.75, 5.35, -7.6, -5.5, 0.25, -7.35, -5.5, 0.25, -5.6, -4, 0.25, -5.6, -4, 0.25, -7.35, 2, 0.25, -7.1, 2, 0.25, -5.6, 3.5, 0.25, -5.6, 3.5, 0.25, -7.1, 11.25, 0.25, -1.6, 11.5, 0.25, -3.1, 11.25, 0.25, -7.1, 5.25, 0.25, -7.1, 5.25, 0.25, -1.6, -5.5, 0.25, -3.35, -5.5, 0.25, -1.6, -4, 0.25, -1.6, -4, 0.25, -3.35, 2, 0.25, -3.35, 2, 0.25, -1.6, 3.5, 0.25, -1.6, 3.5, 0.25, -3.35, -2.75, 0.25, 0.150001, 0.749999, 0.25, 0.400001, 2, 0.25, 4.65, 2.25, 0.25, 0.400001, 15, 0.25, 4.65, 15, 0.25, 1.4, 11.75, 0.25, 1.4, 11.25, 0.25, 0.400001)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 4), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(9, 7, 3), PackedInt32Array(3, 7, 8), PackedInt32Array(3, 0, 9), PackedInt32Array(10, 1, 2), PackedInt32Array(14, 13, 11), PackedInt32Array(11, 13, 12), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 2), PackedInt32Array(14, 11, 10), PackedInt32Array(14, 10, 15), PackedInt32Array(15, 10, 2), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(29, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(33, 32, 30), PackedInt32Array(30, 32, 31), PackedInt32Array(37, 36, 34), PackedInt32Array(34, 36, 35), PackedInt32Array(41, 40, 38), PackedInt32Array(38, 40, 39), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 46), PackedInt32Array(44, 46, 45), PackedInt32Array(50, 49, 47), PackedInt32Array(47, 49, 48), PackedInt32Array(54, 53, 51), PackedInt32Array(51, 53, 52), PackedInt32Array(12, 13, 55), PackedInt32Array(55, 13, 56), PackedInt32Array(55, 56, 5), PackedInt32Array(5, 56, 4), PackedInt32Array(4, 56, 57), PackedInt32Array(56, 58, 57), PackedInt32Array(61, 60, 59), PackedInt32Array(58, 62, 61), PackedInt32Array(58, 61, 57), PackedInt32Array(57, 61, 59)]
+cell_height = 0.15
+agent_radius = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gusw"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="test" type="Node3D"]
+script = ExtResource("1_ndeqo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_trpv2")
+
+[node name="Player" parent="." instance=ExtResource("1_4sme4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.7, 0.0999999, -4.2)
+starting_grabpack = 2
+enabled_hands = Array[PackedScene]([ExtResource("3_ndeqo"), ExtResource("4_d204d"), ExtResource("4_bt7lf"), ExtResource("5_381eo"), ExtResource("4_m4k5q")])
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 6)
+
+[node name="squeezezones" type="Node3D" parent="."]
+
+[node name="SqueezeZone" type="Area3D" parent="squeezezones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 1.8, -4.4)
+script = ExtResource("5_qsrvc")
+player_camera_angle = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="squeezezones/SqueezeZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, -0.55, 0)
+shape = SubResource("BoxShape3D_m4k5q")
+
+[node name="Time" type="Timer" parent="squeezezones/SqueezeZone"]
+one_shot = true
+
+[node name="EventTrigger" type="Area3D" parent="squeezezones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.1, -4.4)
+script = ExtResource("13_5gusw")
+metadata/_custom_type_script = ExtResource("13_5gusw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="squeezezones/EventTrigger"]
+shape = SubResource("BoxShape3D_uqwnt")
+
+[node name="EventTrigger2" type="Area3D" parent="squeezezones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.1, -4.4)
+script = ExtResource("13_5gusw")
+metadata/_custom_type_script = ExtResource("13_5gusw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="squeezezones/EventTrigger2"]
+shape = SubResource("BoxShape3D_5gusw")
+
+[node name="mapmovement" type="Node3D" parent="."]
+
+[node name="JumpPad" parent="mapmovement" instance=ExtResource("8_4y3vx")]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -1.1, 0.0443961, -7.5)
+
+[node name="JumpPad2" parent="mapmovement" instance=ExtResource("8_4y3vx")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 2.5, 0.0443961, 1.5)
+powered = false
+
+[node name="Battery" parent="mapmovement" instance=ExtResource("11_sh2tj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3, 1.7, 0)
+
+[node name="Battery2" parent="mapmovement" instance=ExtResource("11_sh2tj")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -13.3, 1.7, -2)
+
+[node name="Battery3" parent="mapmovement" instance=ExtResource("11_sh2tj")]
+transform = Transform3D(0.183013, -0.965926, -0.183013, 0.683013, 0.258819, -0.683013, 0.707107, 0, 0.707107, -12, 1.7, -3.7)
+
+[node name="Battery4" parent="mapmovement" instance=ExtResource("11_sh2tj")]
+transform = Transform3D(0.5, -1.13133e-08, -0.866025, -0.866025, -4.2222e-08, -0.5, -3.09086e-08, 1, -3.09086e-08, -13.3, 1.7, -5.6)
+
+[node name="BatteryHolder" parent="mapmovement" instance=ExtResource("12_5gusw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.949, 1.3, 0)
+
+[node name="items" type="Node3D" parent="."]
+
+[node name="VhsTape" parent="items" instance=ExtResource("11_jc4vw")]
+transform = Transform3D(0.98165, 0, -0.190689, 0, 1, 0, 0.190689, 0, 0.98165, 0.6, 0.1, 3.6)
+tape_color = Color(1, 0.65098, 0, 1)
+title = "FlareTutorial"
+has_description = true
+description = "A basic guide to using the flare gun."
+
+[node name="VhsPlayer" parent="items" node_paths=PackedStringArray("tv") instance=ExtResource("12_yi5ob")]
+transform = Transform3D(-0.0924402, 0, 0.995718, 0, 1, 0, -0.995718, 0, -0.0924402, -1.76201, 0.1, 4.65832)
+player_color = Color(1, 0.65098, 0, 1)
+vhs_name = "FlareTutorial"
+tv = NodePath("../VhsTV")
+
+[node name="VhsTV" parent="items" instance=ExtResource("13_dnuk6")]
+transform = Transform3D(-0.0924402, 0, 0.995718, 0, 1, 0, -0.995718, 0, -0.0924402, -1.83799, 0.3, 4.66537)
+tv_color = Color(1, 0.65098, 0, 1)
+video = ExtResource("17_bgkgm")
+
+[node name="piano" type="Node3D" parent="."]
+
+[node name="door1" type="CSGBox3D" parent="piano"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1, 1.7, -5.25)
+use_collision = true
+size = Vector3(0.1, 3.6, 1.9)
+
+[node name="door3" type="CSGBox3D" parent="piano"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1, 1.7, -3.35)
+use_collision = true
+size = Vector3(0.1, 3.6, 1.9)
+
+[node name="door2" type="Node3D" parent="piano"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8, 0, -4.8)
+
+[node name="door" type="AnimationPlayer" parent="piano"]
+libraries = {
+&"": SubResource("AnimationLibrary_5gusw")
+}
+
+[node name="PianoSaurus" parent="piano" instance=ExtResource("18_sh2tj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.5, 0, -4)
+
+[node name="Camera3D" type="Camera3D" parent="piano"]
+transform = Transform3D(-3.61999e-06, 0, -1, 0, 1, 0, 1, 0, -3.61999e-06, 7.515, 2, -4.5)
+
+[node name="PianoSectionStart" type="AudioStreamPlayer" parent="piano"]
+stream = ExtResource("20_uqwnt")
+
+[node name="csg" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_dasq6")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -2.23517e-08, -2.85)
+use_collision = true
+size = Vector3(31, 0.1, 16.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.65, 2.6, -5.05)
+use_collision = true
+size = Vector3(3.3, 5, 11)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="csg/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, -0.9, 0.75)
+operation = 2
+size = Vector3(1, 3.4, 3.3)
+material = SubResource("StandardMaterial3D_5gusw")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.65, 2.5, -8.05)
+use_collision = true
+size = Vector3(0.3, 5, 11)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.75, 2.6, -4.45)
+use_collision = true
+size = Vector3(7.5, 5, 3.2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="csg/CSGBox3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
+operation = 2
+size = Vector3(0.4, 2.6, 3.5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.75, 2.5, -4.45)
+use_collision = true
+size = Vector3(7.5, 5, 3.2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="csg/CSGBox3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
+operation = 2
+size = Vector3(0.4, 2.6, 3.5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.1, 2.5, -2.85)
+use_collision = true
+size = Vector3(16.5, 5, 0.3)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.65, 2.6, -0.65)
+use_collision = true
+size = Vector3(0.3, 5, 11)
+
+[node name="pianoAI" type="Node3D" parent="."]
+
+[node name="PianoStart" type="Marker3D" parent="pianoAI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, 0.7, -9.5)
+
+[node name="Point1" type="Marker3D" parent="pianoAI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.7, -9.5)
+
+[node name="Point2" type="Marker3D" parent="pianoAI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.7, 2.6)
+
+[node name="Point3" type="Marker3D" parent="pianoAI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 0.7, -3.8)
+
+[node name="Point4" type="Marker3D" parent="pianoAI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 0.7, -9.6)
+
+[node name="Point5" type="Marker3D" parent="pianoAI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.7, 2.3)
+
+[connection signal="triggered" from="squeezezones/EventTrigger" to="." method="_on_event_trigger_triggered"]
+[connection signal="triggered" from="squeezezones/EventTrigger2" to="." method="_on_event_trigger_2_triggered"]
+[connection signal="animation_finished" from="piano/door" to="." method="_on_door_animation_finished"]

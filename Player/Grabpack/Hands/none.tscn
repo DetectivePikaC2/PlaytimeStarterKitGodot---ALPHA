@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq3pqg6x1byr3"]
+
+[ext_resource type="Script" uid="uid://ch1mlqqd12i0y" path="res://Player/Grabpack/Hands/SettingsComponents/useless.gd" id="1_y4yio"]
+
+[node name="None" type="Node3D"]
+
+[node name="Useless" type="Node" parent="."]
+script = ExtResource("1_y4yio")

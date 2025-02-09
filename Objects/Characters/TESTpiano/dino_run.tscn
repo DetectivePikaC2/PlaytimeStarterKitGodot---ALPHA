@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgh6q6bhj81d6"]
+
+[ext_resource type="PackedScene" uid="uid://ws7ipvyjmavq" path="res://Objects/Characters/TESTpiano/piano_saurus.tscn" id="1_22t42"]
+
+[sub_resource type="Animation" id="Animation_sh2tj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PianoSaurus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-9, 0.1, -13.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PianoSaurus:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5gusw"]
+resource_name = "looppianorun"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PianoSaurus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.00833333, 0, 1, 1.36667, 2.06667, 2.46667, 2.9, 3.33333, 3.93333, 4.46667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-9, 0.1, -13.3), Vector3(-6.78079, 0.1, -10.7127), Vector3(-5.6, 0.1, -2.7), Vector3(-1.5, 0.1, -0.500001), Vector3(6.8, 0.1, -0.500001), Vector3(11.1, 0.1, -1.9), Vector3(11.9, 0.1, -5.8), Vector3(9.6, 0.1, -9.3), Vector3(4.8, 0.1, -14.2), Vector3(-1.05, 0.1, -14.2384), Vector3(-6.78079, 0.1, -10.7127)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PianoSaurus:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.00833333, 0, 0.2, 0.566667, 1, 1.36667, 2.06667, 2.46667, 2.9, 3.33333, 3.93333, 4.42923, 5.00003),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.523599, 0), Vector3(0, -0.0769999, 0), Vector3(0, 0, 0), Vector3(0, 0.785398, 0), Vector3(0, 1.5708, 0), Vector3(0, 1.5708, 0), Vector3(0, 2.35619, 0), Vector3(0, 3.14159, 0), Vector3(0, 3.76991, 0), Vector3(0, 4.43314, 0), Vector3(0, 4.89914, 0), Vector3(0, 5.75959, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqwnt"]
+_data = {
+&"RESET": SubResource("Animation_sh2tj"),
+&"looppianorun": SubResource("Animation_5gusw")
+}
+
+[node name="DinoRun" type="Node3D"]
+
+[node name="PianoSaurus" parent="." instance=ExtResource("1_22t42")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9, 0.1, -13.3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uqwnt")
+}
+autoplay = "looppianorun"

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://3iogwpy7eaqs"]
+
+[ext_resource type="Theme" uid="uid://672wjbmdmkw1" path="res://Interface/Inventory/Themes/inventory_item_button.tres" id="1_u8vu3"]
+[ext_resource type="Script" uid="uid://bpa4it4qh6vgf" path="res://Interface/Inventory/Scripts/inventory_item.gd" id="2_axktd"]
+
+[node name="InvButton" type="Button"]
+offset_right = 393.0
+offset_bottom = 39.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_u8vu3")
+text = "Causion: This is a TEST!"
+alignment = 0
+script = ExtResource("2_axktd")
