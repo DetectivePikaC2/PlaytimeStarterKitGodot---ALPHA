@@ -1,17 +1,21 @@
-[gd_scene load_steps=9 format=4 uid="uid://mgaeb7vr4f7v"]
+[gd_scene load_steps=32 format=4 uid="uid://mgaeb7vr4f7v"]
 
-[ext_resource type="Script" path="res://Objects/Gameplay/Puzzles/Scanners/Scripts/scanner_blue.gd" id="1_w413f"]
+[ext_resource type="Script" uid="uid://bioaue0c67ol3" path="res://Objects/Gameplay/Puzzles/Scanners/Scripts/scanner_blue.gd" id="1_w413f"]
 [ext_resource type="Texture2D" uid="uid://cwnbsxixha14m" path="res://Objects/Gameplay/Puzzles/Scanners/Models/T_HandScanner_BC.png" id="2_5paj6"]
 [ext_resource type="Texture2D" uid="uid://boygdy88rlskj" path="res://Objects/Gameplay/Puzzles/Scanners/Models/T_HandScanner_N.png" id="3_nsi4a"]
 [ext_resource type="Texture2D" uid="uid://cr6fabdebn2mt" path="res://Objects/Gameplay/Puzzles/Scanners/Models/T_HandScanner_ORM.png" id="4_adq8v"]
+[ext_resource type="Script" uid="uid://d4joakp74nxnn" path="res://Objects/Gameplay/HandFunctions/hand_grab.gd" id="5_5paj6"]
+[ext_resource type="Texture2D" uid="uid://hqjtvf0jph2t" path="res://Objects/Gameplay/Puzzles/Scanners/Textures/T_HandScanner.png" id="5_nsi4a"]
+[ext_resource type="Texture2D" uid="uid://c5rc1743vtbi0" path="res://Objects/Gameplay/Puzzles/Scanners/Textures/T_Ready.png" id="6_adq8v"]
+[ext_resource type="AudioStream" uid="uid://dsg70rqmqxrr8" path="res://Objects/Gameplay/Puzzles/Scanners/Sound/SW_SFX_Handscanner_Scanning_LOOP.wav" id="8_u2cos"]
+[ext_resource type="AudioStream" uid="uid://ct414f55tqo1b" path="res://Objects/Gameplay/Puzzles/Scanners/Sound/SW_SFX_Unlock_Chime.wav" id="8_vhg7k"]
+[ext_resource type="AudioStream" uid="uid://mjnwosy64061" path="res://Objects/Gameplay/Puzzles/Scanners/Sound/SW_Keypad_Fail.wav" id="10_4osnw"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_vhg7k"]
 albedo_texture = ExtResource("2_5paj6")
 orm_texture = ExtResource("4_adq8v")
 normal_enabled = true
 normal_texture = ExtResource("3_nsi4a")
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_u2cos"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5al8q"]
 _surfaces = [{
@@ -59,7 +63,6 @@ _surfaces = [{
 "format": 34900799999,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABAAHAAUA"),
-"material": SubResource("ORMMaterial3D_u2cos"),
 "name": "WorldGridMaterial.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -69,9 +72,332 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_5al8q")
 
-[node name="ScannerBlue" type="StaticBody3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5paj6"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.271228, 0.468024, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("5_nsi4a")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nsi4a"]
+size = Vector2(0.35, 0.115)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adq8v"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.141348, 0.376416, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("6_adq8v")
+uv1_scale = Vector3(1, 0.315, 1)
+uv1_offset = Vector3(0, 0.375, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w413f"]
+size = Vector3(0.45, 0.7, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5paj6"]
+size = Vector3(0.45, 0.2, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nsi4a"]
+size = Vector3(0.45, 0.15, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_adq8v"]
+size = Vector3(0.25, 0.3, 0.1)
+
+[sub_resource type="Animation" id="Animation_adq8v"]
+resource_name = "ready"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.375, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.141348, 0.376416, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vhg7k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.375, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.141348, 0.376416, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u2cos"]
+resource_name = "scan_loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.375, 0), Vector3(1, 0.375, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.141348, 0.376416, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4osnw"]
+resource_name = "verified_loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.375, 0), Vector3(1, 0.375, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.141176, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tgr55"]
+resource_name = "error"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:surface_material_override/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.375, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:surface_material_override/0:emission")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"set_state"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhg7k"]
+_data = {
+&"RESET": SubResource("Animation_vhg7k"),
+&"error": SubResource("Animation_tgr55"),
+&"ready": SubResource("Animation_adq8v"),
+&"scan_loop": SubResource("Animation_u2cos"),
+&"verified_loop": SubResource("Animation_4osnw")
+}
+
+[sub_resource type="Animation" id="Animation_nsq8o"]
+resource_name = "ready"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SM_HandScanner_NoWire:surface_material_override/1:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.271228, 0.468024, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3yrwy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SM_HandScanner_NoWire:surface_material_override/1:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.271228, 0.468024, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u88tv"]
+resource_name = "verified"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SM_HandScanner_NoWire:surface_material_override/1:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l1mi8"]
+resource_name = "error"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SM_HandScanner_NoWire:surface_material_override/1:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3yrwy"]
+_data = {
+&"RESET": SubResource("Animation_3yrwy"),
+&"error": SubResource("Animation_l1mi8"),
+&"ready": SubResource("Animation_nsq8o"),
+&"verified": SubResource("Animation_u88tv")
+}
+
+[node name="HandScannerBlue" type="StaticBody3D"]
 script = ExtResource("1_w413f")
 
 [node name="SM_HandScanner_NoWire" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_4osnw")
 skeleton = NodePath("")
+surface_material_override/1 = SubResource("StandardMaterial3D_5paj6")
+
+[node name="Text" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.6, 0.211499)
+mesh = SubResource("PlaneMesh_nsi4a")
+surface_material_override/0 = SubResource("StandardMaterial3D_adq8v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.075)
+shape = SubResource("BoxShape3D_w413f")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.175)
+shape = SubResource("BoxShape3D_5paj6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0749999, 0.175)
+shape = SubResource("BoxShape3D_nsi4a")
+
+[node name="HandGrab" type="Area3D" parent="." node_paths=PackedStringArray("grab_marker")]
+script = ExtResource("5_5paj6")
+grab_animation = "straight"
+grab_marker = NodePath("HandPositionMarker")
+metadata/_custom_type_script = ExtResource("5_5paj6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandGrab"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.15)
+shape = SubResource("BoxShape3D_adq8v")
+
+[node name="HandPositionMarker" type="Marker3D" parent="HandGrab"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187, 0.129)
+
+[node name="TextAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vhg7k")
+}
+
+[node name="ScreenAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3yrwy")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Scanning" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_u2cos")
+
+[node name="ScanComplete" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_vhg7k")
+
+[node name="Fail" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_4osnw")
+
+[connection signal="grabbed" from="HandGrab" to="." method="_on_hand_grab_grabbed"]
+[connection signal="let_go" from="HandGrab" to="." method="_on_hand_grab_let_go"]
+[connection signal="timeout" from="Timer" to="." method="scan_finished"]

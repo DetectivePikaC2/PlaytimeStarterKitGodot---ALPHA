@@ -9,6 +9,7 @@ var hands: Array [PackedScene]
 @onready var ray_cast_3d = $"../../../Neck/RayCast3D"
 @onready var direction_cast = $DirectionCast
 @onready var player = $"../../.."
+@onready var air_grab_point = $"../../../Neck/AirGrabPoint"
 
 @onready var hand_pos = $"../LayerWalk/ArmRight/LayerIdle/LayerWalk/LayerCrouch/LayerJump/LayerPack/LayerSwitch/LayerShoot/HandAttach/HandPos"
 @onready var hand_fake = $"../RightHandFake"
@@ -132,19 +133,21 @@ func launch_hand():
 		return
 	if ray_cast_3d.is_colliding():
 		hand_grab_point = ray_cast_3d.get_collision_point()
-		wire_container.start_wire()
-		canon_right_animation.play("ShootOut")
-		play_animation("fire")
-		sound_manager.launch_hand()
-		sound_manager.cable_sound(true, true)
-		hand_attached = false
-		hand_travelling = true
-		
-		position = hand_fake.global_position
-		
-		#Send Signals
-		if hand_send_signals:
-			hand_signal_connector.emit_signal("hand_launched")
+	else:
+		hand_grab_point = air_grab_point.global_position
+	wire_container.start_wire()
+	canon_right_animation.play("ShootOut")
+	play_animation("fire")
+	sound_manager.launch_hand()
+	sound_manager.cable_sound(true, true)
+	hand_attached = false
+	hand_travelling = true
+	
+	position = hand_fake.global_position
+	
+	#Send Signals
+	if hand_send_signals:
+		hand_signal_connector.emit_signal("hand_launched")
 func fire_non_launchable():
 	if not grabpack.grabpack_usable:
 		return
