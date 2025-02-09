@@ -157,6 +157,9 @@ func raise_grabpack():
 func _input(_event):
 	if Input.is_action_just_pressed("toggle_grabpack"):
 		switch_grabpack(0 if current_grabpack == grabpacks.size() - 1 else current_grabpack + 1)
+	if Input.is_action_pressed("f") and Input.is_action_pressed("u"):
+		left_hand.play_animation("middle")
+		right_hand.play_animation("middle")
 
 func _reset_attachments():
 	attachment_left.bone_idx = 0

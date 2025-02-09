@@ -126,8 +126,6 @@ func _input(event: InputEvent) -> void:
 			var switch_num: int = -1
 			switch_num = event.keycode - KEY_0 # Convert keycode to number
 			switch_hand(1, switch_num)
-	if Input.is_action_just_pressed("emote"):
-		play_animation("middle")
 
 func launch_hand():
 	if not grabpack.grabpack_usable:

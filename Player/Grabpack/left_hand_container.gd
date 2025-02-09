@@ -64,6 +64,7 @@ func _process(delta):
 			if position.distance_to(hand_fake.global_position) < 0.2:
 				canon_right_animation.play("ShootIn")
 				hand_motions_animation.play("retract_impact")
+				play_animation("retract")
 				sound_manager.retract_hand()
 				sound_manager.cable_sound(false, false)
 				canon_right_animation.seek(0.1)
@@ -78,6 +79,7 @@ func launch_hand():
 		hand_grab_point = ray_cast_3d.get_collision_point()
 		wire_container.start_wire()
 		canon_right_animation.play("ShootOut")
+		play_animation("fire")
 		sound_manager.launch_hand()
 		sound_manager.cable_sound(false, true)
 		hand_attached = false
