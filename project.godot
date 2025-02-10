@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+warnings/check_invalid_track_paths=false
+
 [application]
 
 config/name="MobGodot"
@@ -32,7 +36,6 @@ settings/stdout/print_fps=true
 window/size/initial_position_type=2
 window/size/initial_screen=1
 window/stretch/mode="canvas_items"
-window/vsync/vsync_mode=2
 
 [dotnet]
 

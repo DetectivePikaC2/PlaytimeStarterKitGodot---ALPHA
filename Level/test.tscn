@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://dhjsvwgpbf3bx" path="res://Objects/Gameplay/event_trigger.gd" id="13_5gusw"]
 [ext_resource type="PackedScene" uid="uid://nki7jml0otrb" path="res://Objects/Gameplay/VHS/vhs_tv.tscn" id="13_dnuk6"]
 [ext_resource type="PackedScene" uid="uid://mgaeb7vr4f7v" path="res://Objects/Gameplay/Puzzles/Scanners/scanner_left_ch4.tscn" id="13_uqwnt"]
-[ext_resource type="PackedScene" uid="uid://djxegucg0r1te" path="res://Objects/Gameplay/Puzzles/Scanners/scanner_right_ch4.tscn" id="14_uqwnt"]
+[ext_resource type="PackedScene" uid="uid://djxegucg0r1te" path="res://Objects/Gameplay/Puzzles/Scanners/scanner_right_ch4.tscn" id="14_cbe6w"]
 [ext_resource type="VideoStream" uid="uid://dtl0wkh0at5ua" path="res://Interface/Video/FlareHand_VHS.ogv" id="17_bgkgm"]
 [ext_resource type="PackedScene" uid="uid://ws7ipvyjmavq" path="res://Objects/Characters/TESTpiano/piano_saurus.tscn" id="18_sh2tj"]
 [ext_resource type="AudioStream" uid="uid://7lgjgn0ix3r" path="res://Objects/Characters/TESTpiano/sfx/12_Last_Meal.wav" id="20_uqwnt"]
@@ -280,10 +280,10 @@ transform = Transform3D(0.5, -1.13133e-08, -0.866025, -0.866025, -4.2222e-08, -0
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.949, 1.3, 4.1)
 
 [node name="HandScannerLeft" parent="puzzle" instance=ExtResource("13_uqwnt")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -14.9577, 1.9, -2.3)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 1.5, 0)
 
-[node name="HandScannerRight" parent="puzzle" instance=ExtResource("14_uqwnt")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -14.9577, 1.9, -6.3)
+[node name="HandScannerRight" parent="puzzle" instance=ExtResource("14_cbe6w")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 1.5, -2.9)
 
 [node name="items" type="Node3D" parent="."]
 
@@ -301,7 +301,7 @@ vhs_name = "Pianosaurus"
 tv = NodePath("../VhsTV")
 
 [node name="VhsTV" parent="items" instance=ExtResource("13_dnuk6")]
-transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -1.81594, 0.247714, 4.79651)
+transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -1.81594, 0.230204, 4.79651)
 tv_color = Color(0, 1, 0, 1)
 video = ExtResource("17_bgkgm")
 
@@ -425,6 +425,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.7, 2.3)
 
 [connection signal="triggered" from="squeezezones/EventTrigger" to="." method="_on_event_trigger_triggered"]
 [connection signal="triggered" from="squeezezones/EventTrigger2" to="." method="_on_event_trigger_2_triggered"]
-[connection signal="scan_started" from="puzzle/HandScannerLeft" to="." method="_on_hand_scanner_left_scan_started"]
-[connection signal="scan_started" from="puzzle/HandScannerRight" to="." method="_on_hand_scanner_right_scan_started"]
 [connection signal="animation_finished" from="piano/door" to="." method="_on_door_animation_finished"]
