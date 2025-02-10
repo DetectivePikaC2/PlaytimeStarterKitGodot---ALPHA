@@ -277,32 +277,40 @@ transform = Transform3D(0.183013, -0.965926, -0.183013, 0.683013, 0.258819, -0.6
 transform = Transform3D(0.5, -1.13133e-08, -0.866025, -0.866025, -4.2222e-08, -0.5, -3.09086e-08, 1, -3.09086e-08, -13.3, 1.7, -5.6)
 
 [node name="BatteryHolder" parent="puzzle" instance=ExtResource("12_5gusw")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.949, 1.3, 4.1)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.949, 1.3, 0)
 
-[node name="HandScannerLeft" parent="puzzle" instance=ExtResource("13_uqwnt")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -14.9577, 1.9, -2.3)
+[node name="HandScannerLeft" parent="puzzle" node_paths=PackedStringArray("other_scanner") instance=ExtResource("13_uqwnt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 1.9, -6.3)
+requires_other_scanner = true
+other_scanner = NodePath("../HandScannerRight")
 
 [node name="HandScannerRight" parent="puzzle" instance=ExtResource("14_uqwnt")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -14.9577, 1.9, -6.3)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 1.9, -2.3)
+
+[node name="HandScannerLeft2" parent="puzzle" instance=ExtResource("13_uqwnt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.2, 1.9, -6.3)
+
+[node name="HandScannerRight2" parent="puzzle" instance=ExtResource("14_uqwnt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.2, 1.9, -2.3)
 
 [node name="items" type="Node3D" parent="."]
 
 [node name="VhsTape" parent="items" instance=ExtResource("11_jc4vw")]
-transform = Transform3D(0.98165, 0, -0.190689, 0, 1, 0, 0.190689, 0, 0.98165, 4.9, 0.0541902, -1.4)
-tape_color = Color(0, 1, 0, 1)
-title = "Pianosaurus"
+transform = Transform3D(0.98165, 0, -0.190689, 0, 1, 0, 0.190689, 0, 0.98165, 0.6, 0.1, 3.6)
+tape_color = Color(1, 0.65098, 0, 1)
+title = "FlareTutorial"
 has_description = true
-description = "An old commercial for Pianosaurus"
+description = "A basic guide to using the flare gun."
 
 [node name="VhsPlayer" parent="items" node_paths=PackedStringArray("tv") instance=ExtResource("12_yi5ob")]
-transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -1.78406, 0.047714, 4.72718)
-player_color = Color(0, 1, 0, 1)
-vhs_name = "Pianosaurus"
+transform = Transform3D(-0.0924402, 0, 0.995718, 0, 1, 0, -0.995718, 0, -0.0924402, -1.76201, 0.1, 4.65832)
+player_color = Color(1, 0.65098, 0, 1)
+vhs_name = "FlareTutorial"
 tv = NodePath("../VhsTV")
 
 [node name="VhsTV" parent="items" instance=ExtResource("13_dnuk6")]
-transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -1.81594, 0.247714, 4.79651)
-tv_color = Color(0, 1, 0, 1)
+transform = Transform3D(-0.0924402, 0, 0.995718, 0, 1, 0, -0.995718, 0, -0.0924402, -1.83799, 0.3, 4.66537)
+tv_color = Color(1, 0.65098, 0, 1)
 video = ExtResource("17_bgkgm")
 
 [node name="piano" type="Node3D" parent="."]
@@ -427,4 +435,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.7, 2.3)
 [connection signal="triggered" from="squeezezones/EventTrigger2" to="." method="_on_event_trigger_2_triggered"]
 [connection signal="scan_started" from="puzzle/HandScannerLeft" to="." method="_on_hand_scanner_left_scan_started"]
 [connection signal="scan_started" from="puzzle/HandScannerRight" to="." method="_on_hand_scanner_right_scan_started"]
+[connection signal="scan_started" from="puzzle/HandScannerLeft2" to="." method="_on_hand_scanner_left_scan_started"]
+[connection signal="scan_started" from="puzzle/HandScannerRight2" to="." method="_on_hand_scanner_right_scan_started"]
 [connection signal="animation_finished" from="piano/door" to="." method="_on_door_animation_finished"]

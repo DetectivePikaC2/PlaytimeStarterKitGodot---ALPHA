@@ -53,3 +53,10 @@ func _on_door_animation_finished(anim_name):
 		CameraTransition.transition_camera(camera_3d, Grabpack.player.camera, 1.0)
 	if anim_name == "move":
 		pianimation.play("Piano_PeakThrough")
+
+
+func _on_hand_scanner_right_scan_started():
+	pass # Replace with function body.
+
+func _on_hand_scanner_left_scan_started():
+	pass # Replace with function body.

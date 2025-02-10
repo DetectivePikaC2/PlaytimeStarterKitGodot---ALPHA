@@ -4,7 +4,7 @@ var hud = null
 
 var current_objective = "none"
 
-func _ready() -> void:
+func reset_nodes():
 	if not get_tree().get_first_node_in_group("HUD") == null:
 		hud = get_tree().get_first_node_in_group("HUD")
 
