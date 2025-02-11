@@ -27,7 +27,7 @@ func _ready():
 	connect("area_exited", Callable(hand_released))
 
 func _process(_delta):
-	if not Engine.is_editor_hint():
+	if enabled and not Engine.is_editor_hint():
 		if grabbed_left:
 			if update_every_frame:
 				update_hand_position(false)

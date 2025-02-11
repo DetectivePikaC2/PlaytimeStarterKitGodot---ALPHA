@@ -1,8 +1,14 @@
-[gd_scene load_steps=10 format=4 uid="uid://rfnlwudwu2cl"]
+[gd_scene load_steps=18 format=4 uid="uid://rfnlwudwu2cl"]
 
+[ext_resource type="Script" uid="uid://bx5w6t8uuhdip" path="res://Objects/Gameplay/Puzzles/Battery/Scripts/battery_holder.gd" id="1_c2y7u"]
 [ext_resource type="Texture2D" uid="uid://doeomqm4lk0fe" path="res://Objects/Gameplay/Puzzles/Battery/Model/T_BatteryFrame_BC.png" id="1_mixr2"]
 [ext_resource type="Texture2D" uid="uid://bo2oskukt6cnt" path="res://Objects/Gameplay/Puzzles/Battery/Model/T_BatteryFrame_N.png" id="2_c2y7u"]
 [ext_resource type="Texture2D" uid="uid://bbnuipxyaitmf" path="res://Objects/Gameplay/Puzzles/Battery/Model/T_BatteryFrame_ORMA.png" id="3_ssdk3"]
+[ext_resource type="PackedScene" uid="uid://pcbe4d8vixhy" path="res://Objects/Gameplay/Puzzles/Battery/battery.tscn" id="5_ssdk3"]
+[ext_resource type="AudioStream" uid="uid://c6q72vekvja87" path="res://Objects/Gameplay/Puzzles/Battery/Sound/SW_Battery_PowerOn_01.wav" id="6_6k68m"]
+[ext_resource type="AudioStream" uid="uid://l346e5yckcl5" path="res://Objects/Gameplay/Puzzles/Battery/Sound/SW_Battery_PowerDown_01.wav" id="7_kari3"]
+[ext_resource type="AudioStream" uid="uid://dx30p2j7fixqb" path="res://Objects/Gameplay/Puzzles/Battery/Sound/SW_Battery_IdleHum_LOOP_01.wav" id="8_il7wc"]
+[ext_resource type="AudioStream" uid="uid://dbpgwmp5oahy3" path="res://Objects/Gameplay/Puzzles/Battery/Sound/SW_Battery_LockIn_01.wav" id="9_p1xte"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bp6j4"]
 size = Vector3(0.85, 1.25, 0.7)
@@ -77,10 +83,19 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k7165")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6k68m"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kari3"]
+material = SubResource("StandardMaterial3D_6k68m")
+size = Vector2(0.475, 0.475)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mixr2"]
-size = Vector3(0.4, 0.4, 0.25)
+size = Vector3(0.4, 0.4, 0.2)
 
 [node name="BatteryHolder" type="StaticBody3D"]
+script = ExtResource("1_c2y7u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, -0.3)
@@ -90,8 +105,32 @@ shape = SubResource("BoxShape3D_bp6j4")
 mesh = SubResource("ArrayMesh_1btyg")
 skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="black" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.425994, 0.032089)
+mesh = SubResource("PlaneMesh_kari3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.425, 0.075)
+[node name="Battery" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.43, 0.101616)
+
+[node name="BatteryNode" parent="." instance=ExtResource("5_ssdk3")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.429895, 0.101616)
+
+[node name="Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.425, 0.05)
 shape = SubResource("BoxShape3D_mixr2")
+
+[node name="PowerUp" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_6k68m")
+
+[node name="PowerDown" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_kari3")
+
+[node name="Idle" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_il7wc")
+
+[node name="Lock" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_p1xte")
+
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://pcbe4d8vixhy"]
+[gd_scene load_steps=14 format=4 uid="uid://pcbe4d8vixhy"]
 
 [ext_resource type="Texture2D" uid="uid://cyvg5y2pmhifg" path="res://Objects/Gameplay/Puzzles/Battery/Model/T_Battery_BC.png" id="1_7nrsn"]
 [ext_resource type="Script" uid="uid://cx3axy6jyfw88" path="res://Objects/Gameplay/Puzzles/Battery/Scripts/battery.gd" id="1_fwmpr"]
@@ -57,6 +57,9 @@ shadow_mesh = SubResource("ArrayMesh_p2q63")
 [sub_resource type="BoxShape3D" id="BoxShape3D_17txs"]
 size = Vector3(0.4, 0.65, 0.4)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjsgh"]
+size = Vector3(0.45, 0.7, 0.45)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_x3t7i"]
 size = Vector3(0.45, 0.7, 0.45)
 
@@ -72,9 +75,16 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
 shape = SubResource("BoxShape3D_17txs")
 
+[node name="Battery" type="Area3D" parent="." groups=["Battery"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Battery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
+shape = SubResource("BoxShape3D_fjsgh")
+
 [node name="HandGrab" type="Area3D" parent="." node_paths=PackedStringArray("grab_marker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("4_x3t7i")
+update_every_frame = true
 grab_animation = "handle"
 grab_marker = NodePath("HandPositionMarker")
 metadata/_custom_type_script = ExtResource("4_x3t7i")
