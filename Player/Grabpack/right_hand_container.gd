@@ -46,6 +46,8 @@ var hand_travelling: bool = false
 var hand_reached_point: bool = false
 var hand_grab_point: Vector3 = Vector3.ZERO
 var quick_retract: bool = true
+var holding_object: bool = false
+var hand_hold_time: float = 0.0
 
 var retract_type = false
 var hand_speed: float = 35.0
@@ -58,19 +60,18 @@ func _ready():
 	set_hand(0)
 
 func _process(delta):
-	if Input.is_action_just_pressed("handright"):
-		if not hand_useless:
-			if fire_mode_launch:
-				if hand_attached:
-					launch_hand()
-					
-					#Send Signals
-					if hand_send_signals:
-						hand_signal_connector.emit_signal("hand_used")
-				elif not hand_retracting:
-					retract_hand()
-			elif not hand_useless:
-				fire_non_launchable()
+	if holding_object:
+		if Input.is_action_pressed("handright"):
+			hand_hold_time += 1.0 * delta
+			if hand_hold_time > 1.0:
+				holding_object = false
+		elif Input.is_action_just_released("handright"):
+			sort_hand_use()
+			hand_hold_time = 0.0
+	else:
+		hand_hold_time = 0.0
+		if Input.is_action_just_pressed("handright"):
+			sort_hand_use()
 	if hand_attached:
 		global_transform = hand_pos.global_transform
 	else:
@@ -116,18 +117,33 @@ func _process(delta):
 				if hand_send_signals:
 					hand_signal_connector.emit_signal("hand_finished_retract")
 	
-	if Input.is_action_just_pressed("hand_up"):
-		switch_hand(1, current_hand + 1)
-	elif Input.is_action_just_pressed("hand_down"):
-		switch_hand(1, current_hand - 1)
+	if not holding_object:
+		if Input.is_action_just_pressed("hand_up"):
+			switch_hand(1, current_hand + 1)
+		elif Input.is_action_just_pressed("hand_down"):
+			switch_hand(1, current_hand - 1)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode >= KEY_0 and event.keycode <= KEY_9:
-			var switch_num: int = -1
-			switch_num = event.keycode - KEY_0 # Convert keycode to number
-			switch_hand(1, switch_num)
+	if not holding_object:
+		if event is InputEventKey and event.pressed:
+			if event.keycode >= KEY_0 and event.keycode <= KEY_9:
+				var switch_num: int = -1
+				switch_num = event.keycode - KEY_0 # Convert keycode to number
+				switch_hand(1, switch_num)
 
+func sort_hand_use():
+	if not hand_useless:
+		if fire_mode_launch:
+			if hand_attached:
+				launch_hand()
+				
+				#Send Signals
+				if hand_send_signals:
+					hand_signal_connector.emit_signal("hand_used")
+			elif not hand_retracting:
+				retract_hand()
+		elif not hand_useless:
+			fire_non_launchable()
 func launch_hand():
 	if not grabpack.grabpack_usable:
 		return
@@ -177,19 +193,19 @@ func retract_hand():
 		hand_signal_connector.emit_signal("hand_started_retract")
 
 func switch_hand(type: int, new_hand: int):
-	#MAKE SURE THE HAND IS ATTACHED
-	if not hand_attached:
-		return
-	if not grabpack.grabpack_switchable_hands:
-		return
-	
-	queue_hand(new_hand)
-	if hand_queue == current_hand:
-		return
-	if type == 0:
-		switch_animation.play("CollectSwitch")
-	elif type == 1:
-		switch_animation.play("ScrewSwitch")
+		#MAKE SURE THE HAND IS ATTACHED
+		if not hand_attached:
+			return
+		if not grabpack.grabpack_switchable_hands:
+			return
+		
+		queue_hand(new_hand)
+		if hand_queue == current_hand:
+			return
+		if type == 0:
+			switch_animation.play("CollectSwitch")
+		elif type == 1:
+			switch_animation.play("ScrewSwitch")
 
 #HAND DATA
 func set_hand(hand_index: int):

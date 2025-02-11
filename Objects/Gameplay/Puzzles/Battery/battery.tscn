@@ -64,14 +64,16 @@ size = Vector3(0.45, 0.7, 0.45)
 script = ExtResource("1_fwmpr")
 
 [node name="SM_Battery" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 mesh = SubResource("ArrayMesh_jmrq5")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
 shape = SubResource("BoxShape3D_17txs")
 
 [node name="HandGrab" type="Area3D" parent="." node_paths=PackedStringArray("grab_marker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("4_x3t7i")
 grab_animation = "handle"
 grab_marker = NodePath("HandPositionMarker")
@@ -88,5 +90,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0985467, 0)
 process_priority = 100
 script = ExtResource("6_fjsgh")
 
-[connection signal="grabbed" from="HandGrab" to="." method="_on_hand_grab_grabbed"]
 [connection signal="let_go" from="HandGrab" to="." method="_on_hand_grab_let_go"]
+[connection signal="let_go" from="ItemHoldable" to="." method="_on_item_holdable_let_go"]

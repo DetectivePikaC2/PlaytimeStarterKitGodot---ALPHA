@@ -22,6 +22,8 @@ var hand_travelling: bool = false
 var hand_reached_point: bool = false
 var hand_grab_point: Vector3 = Vector3.ZERO
 var quick_retract: bool = true
+var holding_object: bool = false
+var hand_hold_time: float = 0.0
 
 var retract_type = false
 var hand_speed: float = 35.0
@@ -30,11 +32,18 @@ var impact_distance:float = 15.0
 var exit_size: Vector3 = Vector3(1.0, 1.0, 1.0)
 
 func _process(delta):
-	if Input.is_action_just_pressed("handleft"):
-		if hand_attached:
-			launch_hand()
-		elif not hand_retracting:
-			retract_hand()
+	if holding_object:
+		if Input.is_action_pressed("handleft"):
+			hand_hold_time += 1.0 * delta
+			if hand_hold_time > 1.0:
+				holding_object = false
+		elif Input.is_action_just_released("handleft"):
+			sort_hand_use()
+			hand_hold_time = 0.0
+	else:
+		hand_hold_time = 0.0
+		if Input.is_action_just_pressed("handleft"):
+			sort_hand_use()
 	
 	if hand_attached:
 		global_transform = hand_pos.global_transform
@@ -73,6 +82,11 @@ func _process(delta):
 				hand_attached = true
 				hand_retracting = false
 
+func sort_hand_use():
+	if hand_attached:
+		launch_hand()
+	elif not hand_retracting:
+		retract_hand()
 func launch_hand():
 	if not grabpack.grabpack_usable:
 		return

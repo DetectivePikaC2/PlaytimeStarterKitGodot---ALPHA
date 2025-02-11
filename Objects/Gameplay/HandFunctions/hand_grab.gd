@@ -3,6 +3,7 @@ extends Area3D
 class_name HandGrab
 
 @export var enabled: bool = true
+@export var update_every_frame: bool = false
 @export var affect_position: bool = true
 @export var affect_rotation: bool = true
 @export var stop_hand: bool = true
@@ -18,6 +19,9 @@ var grabbed_right: bool = false
 var pulling_left: bool = false
 var pulling_right: bool = false
 
+var grabL: bool = false
+var grabR: bool = false
+
 func _ready():
 	connect("area_entered", Callable(hand_grabbed))
 	connect("area_exited", Callable(hand_released))
@@ -25,28 +29,38 @@ func _ready():
 func _process(_delta):
 	if not Engine.is_editor_hint():
 		if grabbed_left:
+			if update_every_frame:
+				update_hand_position(false)
 			if Input.is_action_pressed("handleft") and not pulling_left:
 				emit_signal("pulled")
 				pulling_left = true
 		if grabbed_right:
+			if update_every_frame:
+				update_hand_position(true)
 			if Input.is_action_pressed("handright") and not pulling_right:
 				emit_signal("pulled")
 				pulling_right = true
 
 func hand_grabbed(area):
-	if area.is_in_group("LeftHandArea") and not Grabpack.left_hand.hand_attached:
-		update_hand_position(false)
-	elif area.is_in_group("RightHandArea") and not Grabpack.right_hand.hand_attached:
-		update_hand_position(true)
+	if enabled:
+		if area.is_in_group("LeftHandArea") and not Grabpack.left_hand.hand_attached:
+			update_hand_position(false)
+			grabL = true
+		elif area.is_in_group("RightHandArea") and not Grabpack.right_hand.hand_attached:
+			update_hand_position(true)
+			grabR = true
 func hand_released(area):
-	if area.is_in_group("LeftHandArea"):
-		grabbed_left = false
-		pulling_left = false
-		emit_signal("let_go", false)
-	elif area.is_in_group("RightHandArea"):
-		grabbed_right = false
-		pulling_right = false
-		emit_signal("let_go", true)
+	if enabled:
+		if area.is_in_group("LeftHandArea") and grabL:
+			grabbed_left = false
+			pulling_left = false
+			emit_signal("let_go", false)
+			grabL = false
+		elif area.is_in_group("RightHandArea") and grabR:
+			grabbed_right = false
+			pulling_right = false
+			emit_signal("let_go", true)
+			grabR = false
 
 func update_hand_position(hand: bool):
 	if hand:
