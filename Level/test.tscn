@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://db7hg6cct3iu0"]
+[gd_scene load_steps=44 format=4 uid="uid://db7hg6cct3iu0"]
 
 [ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
 [ext_resource type="Script" uid="uid://dka7ua0ef5uqh" path="res://Level/Scripts/test.gd" id="1_ndeqo"]
@@ -24,6 +24,8 @@
 [ext_resource type="AudioStream" uid="uid://7lgjgn0ix3r" path="res://Objects/Characters/TESTpiano/sfx/12_Last_Meal.wav" id="20_uqwnt"]
 [ext_resource type="Texture2D" uid="uid://bsgqx2nu8s7i6" path="res://Player/Grabpack/Models/Hands/T_OmniHand_Nb.png" id="21_ni15x"]
 [ext_resource type="Texture2D" uid="uid://cyjvafqliagnq" path="res://Player/Grabpack/Models/Hands/T_OmniHand_ORM.png" id="22_x5pb7"]
+[ext_resource type="PackedScene" uid="uid://c8xb5tk36xptf" path="res://Objects/Gameplay/Extra/limón.tscn" id="23_bv0qt"]
+[ext_resource type="PackedScene" uid="uid://cgfr84c3rrtym" path="res://Objects/Gameplay/Gates/door.tscn" id="24_ni15x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_efwbx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -630,6 +632,12 @@ skin = SubResource("Skin_bv0qt")
 [node name="Object_31" type="MeshInstance3D" parent="items/ItemHand/Skeleton3DE2"]
 mesh = SubResource("ArrayMesh_ni15x")
 skin = SubResource("Skin_bv0qt")
+
+[node name="Limón" parent="items" instance=ExtResource("23_bv0qt")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 10.5, 0.3, 0.1)
+
+[node name="Door" parent="items" instance=ExtResource("24_ni15x")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.2, 0, 0.3)
 
 [node name="piano" type="Node3D" parent="."]
 

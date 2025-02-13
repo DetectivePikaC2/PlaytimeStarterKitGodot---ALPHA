@@ -45,9 +45,11 @@ func hand_grabbed(area):
 	if enabled:
 		if area.is_in_group("LeftHandArea") and not Grabpack.left_hand.hand_attached:
 			update_hand_position(false)
+			emit_signal("grabbed", false)
 			grabL = true
 		elif area.is_in_group("RightHandArea") and not Grabpack.right_hand.hand_attached:
 			update_hand_position(true)
+			emit_signal("grabbed", true)
 			grabR = true
 func hand_released(area):
 	if enabled:
@@ -81,7 +83,6 @@ func update_hand_position(hand: bool):
 		if stop_hand:
 			Grabpack.left_cancel_auto()
 		Grabpack.animate_left(grab_animation)
-	emit_signal("grabbed", hand)
 
 func release_grabbed():
 	if grabbed_left:

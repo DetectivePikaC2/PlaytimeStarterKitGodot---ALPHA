@@ -5,6 +5,12 @@ signal player_interacted
 
 var colliding: bool = false
 
+func _ready():
+	collision_layer &= ~1  # Disable layer 1
+	collision_mask &= ~1   # Disable mask 1
+	collision_layer |= 2  # Enable layer 1
+	collision_mask |= 2   # Enable mask 1
+
 func _process(_delta):
 	if not Grabpack.item_raycast:
 		return
