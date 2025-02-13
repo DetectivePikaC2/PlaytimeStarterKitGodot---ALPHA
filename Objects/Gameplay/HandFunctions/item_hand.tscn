@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyr40ig1p5la1"]
+
+[ext_resource type="Script" uid="uid://b0aosi5j8i5n8" path="res://Objects/Gameplay/HandFunctions/hand_item.gd" id="1_xguv0"]
+[ext_resource type="Script" uid="uid://d4joakp74nxnn" path="res://Objects/Gameplay/HandFunctions/hand_grab.gd" id="5_f6674"]
+[ext_resource type="PackedScene" uid="uid://b6d8fh6o30302" path="res://Objects/Gameplay/interaction_indicator.tscn" id="6_7q467"]
+[ext_resource type="Script" uid="uid://cp2nj828ny1um" path="res://Objects/Gameplay/HandFunctions/interaction.gd" id="7_34wlc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o314p"]
+size = Vector3(0.35, 0.45, 0.3)
+
+[node name="HandItem" type="Node3D"]
+script = ExtResource("1_xguv0")
+
+[node name="HandGrab" type="Area3D" parent="." node_paths=PackedStringArray("grab_marker")]
+script = ExtResource("5_f6674")
+grab_animation = "sphere"
+grab_marker = NodePath("HandPositionMarker")
+metadata/_custom_type_script = ExtResource("5_f6674")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandGrab"]
+transform = Transform3D(1, 0, -1.49012e-08, 7.45058e-09, 1, 0, -5.96046e-08, 0, 1, -0.0197576, 0.15, -0.0500028)
+shape = SubResource("BoxShape3D_o314p")
+
+[node name="HandPositionMarker" type="Marker3D" parent="HandGrab"]
+transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
+
+[node name="InteractionIndicator" parent="." instance=ExtResource("6_7q467")]
+transform = Transform3D(1, 0, -1.49012e-08, 7.45058e-09, 1, 0, -5.96046e-08, 0, 1, 0.00682002, 0.261188, 0.0254529)
+
+[node name="BasicInteraction" type="Area3D" parent="."]
+script = ExtResource("7_34wlc")
+metadata/_custom_type_script = ExtResource("7_34wlc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicInteraction"]
+transform = Transform3D(1, 0, -1.49012e-08, 7.45058e-09, 1, 0, -5.96046e-08, 0, 1, -0.0197576, 0.15, -0.0500028)
+shape = SubResource("BoxShape3D_o314p")
+
+[connection signal="let_go" from="HandGrab" to="." method="_on_hand_grab_let_go"]
+[connection signal="player_interacted" from="BasicInteraction" to="." method="_on_basic_interaction_player_interacted"]

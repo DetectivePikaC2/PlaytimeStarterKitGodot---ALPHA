@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6d8fh6o30302"]
+
+[ext_resource type="Script" uid="uid://bhunsqjesn8kw" path="res://Objects/Gameplay/interaction_indicator.gd" id="1_b7psr"]
+[ext_resource type="FontFile" uid="uid://dp3oq0ou16joq" path="res://Interface/Font/VCR_OSD_MONO_1.001.ttf" id="2_xrws7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7psr"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.654902)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrws7"]
+material = SubResource("StandardMaterial3D_b7psr")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xrws7"]
+resource_local_to_scene = true
+radius = 2.5
+
+[node name="InteractionIndicator" type="Node3D"]
+script = ExtResource("1_b7psr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_xrws7")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.485, 0, 0, 0, 0.485, 0, 0, 0, 0.485, 0, 0.00664148, 0)
+billboard = 1
+text = "E"
+font = ExtResource("2_xrws7")
+outline_size = 0
+
+[node name="Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area"]
+shape = SubResource("SphereShape3D_xrws7")
+
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
