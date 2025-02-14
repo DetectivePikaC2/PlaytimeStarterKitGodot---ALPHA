@@ -7,6 +7,7 @@ extends Node3D
 @onready var piano_section_start = $piano/PianoSectionStart
 @onready var ai_folder = $pianoAI
 @onready var piano_start = $pianoAI/PianoStart
+@onready var gate = $puzzle/Gate
 
 var pianoAI: CharacterBody3D = null
 
@@ -54,9 +55,5 @@ func _on_door_animation_finished(anim_name):
 	if anim_name == "move":
 		pianimation.play("Piano_PeakThrough")
 
-
-func _on_hand_scanner_right_scan_started():
-	pass # Replace with function body.
-
-func _on_hand_scanner_left_scan_started():
-	pass # Replace with function body.
+func _on_scanner_linker_scanners_finished():
+	gate.opengate()

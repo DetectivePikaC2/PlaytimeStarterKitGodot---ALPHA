@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://db7hg6cct3iu0"]
+[gd_scene load_steps=46 format=4 uid="uid://db7hg6cct3iu0"]
 
 [ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
 [ext_resource type="Script" uid="uid://dka7ua0ef5uqh" path="res://Level/Scripts/test.gd" id="1_ndeqo"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://nki7jml0otrb" path="res://Objects/Gameplay/VHS/vhs_tv.tscn" id="13_dnuk6"]
 [ext_resource type="PackedScene" uid="uid://mgaeb7vr4f7v" path="res://Objects/Gameplay/Puzzles/Scanners/scanner_left_ch4.tscn" id="13_uqwnt"]
 [ext_resource type="PackedScene" uid="uid://djxegucg0r1te" path="res://Objects/Gameplay/Puzzles/Scanners/scanner_right_ch4.tscn" id="14_cbe6w"]
+[ext_resource type="PackedScene" uid="uid://cci31kuqdnklx" path="res://Objects/Gameplay/Gates/gate.tscn" id="16_x5pb7"]
+[ext_resource type="Script" uid="uid://d2uwlj4ces3de" path="res://Objects/Gameplay/Puzzles/Scanners/Scripts/scanner_linker.gd" id="17_601od"]
 [ext_resource type="VideoStream" uid="uid://dtl0wkh0at5ua" path="res://Interface/Video/FlareHand_VHS.ogv" id="17_bgkgm"]
 [ext_resource type="PackedScene" uid="uid://ws7ipvyjmavq" path="res://Objects/Characters/TESTpiano/piano_saurus.tscn" id="18_sh2tj"]
 [ext_resource type="PackedScene" uid="uid://dyr40ig1p5la1" path="res://Objects/Gameplay/HandFunctions/item_hand.tscn" id="19_cbe6w"]
@@ -426,10 +428,21 @@ starts_with_battery = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -14.949, 2.9, 2.6)
 
 [node name="HandScannerLeft" parent="puzzle" instance=ExtResource("13_uqwnt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 1.5, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 1.5, 1.1)
 
 [node name="HandScannerRight" parent="puzzle" instance=ExtResource("14_cbe6w")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 1.5, -2.9)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 1.5, -3.9)
+
+[node name="Door" parent="puzzle" instance=ExtResource("24_ni15x")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.2, 0, 0.3)
+
+[node name="Gate" parent="puzzle" instance=ExtResource("16_x5pb7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 0, -1.4)
+colour = 1
+
+[node name="ScannerLinker" type="Node" parent="puzzle" node_paths=PackedStringArray("scanners")]
+script = ExtResource("17_601od")
+scanners = [NodePath("../HandScannerLeft"), NodePath("../HandScannerRight")]
 
 [node name="items" type="Node3D" parent="."]
 
@@ -636,9 +649,6 @@ skin = SubResource("Skin_bv0qt")
 [node name="Limón" parent="items" instance=ExtResource("23_bv0qt")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 10.5, 0.3, 0.1)
 
-[node name="Door" parent="items" instance=ExtResource("24_ni15x")]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.2, 0, 0.3)
-
 [node name="piano" type="Node3D" parent="."]
 
 [node name="door1" type="CSGBox3D" parent="piano"]
@@ -717,6 +727,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15.1,
 use_collision = true
 size = Vector3(16.5, 5, 0.3)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="csg/CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, -1.05, 0)
+operation = 2
+size = Vector3(3.2, 2.9, 1)
+
 [node name="CSGBox3D5" type="CSGBox3D" parent="csg"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.65, 2.6, -0.65)
 use_collision = true
@@ -759,4 +774,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8, 0.7, 2.3)
 
 [connection signal="triggered" from="squeezezones/EventTrigger" to="." method="_on_event_trigger_triggered"]
 [connection signal="triggered" from="squeezezones/EventTrigger2" to="." method="_on_event_trigger_2_triggered"]
+[connection signal="scanners_finished" from="puzzle/ScannerLinker" to="." method="_on_scanner_linker_scanners_finished"]
 [connection signal="animation_finished" from="piano/door" to="." method="_on_door_animation_finished"]
