@@ -51,7 +51,7 @@ normal_texture = ExtResource("3_gxx2s")
 size = Vector3(1.6, 0.05, 1.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gxx2s"]
-size = Vector3(1, 0.0688477, 1)
+size = Vector3(1.25, 0.0688477, 1.25)
 
 [node name="JumpPad" type="StaticBody3D"]
 script = ExtResource("1_7q4e3")
@@ -68,7 +68,7 @@ light_energy = 4.0
 omni_range = 3.89352
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00578991, 0)
 shape = SubResource("BoxShape3D_7q4e3")
 
 [node name="HandDetection" type="Area3D" parent="."]

@@ -8,18 +8,21 @@ extends Node3D
 @onready var ai_folder = $pianoAI
 @onready var piano_start = $pianoAI/PianoStart
 @onready var gate = $puzzle/Gate
+@onready var gate_2 = $puzzle/Gate2
+@onready var gate_3 = $puzzle/Gate3
 
 var pianoAI: CharacterBody3D = null
 
 func _ready():
 	pianimation.connect("animation_finished", Callable(pianimation_finished))
 
-func _on_event_trigger_triggered():
+func _on_hand_scanner_left_scan_success():
 	piano_section_start.play()
 	Grabpack.lower_grabpack()
 	Grabpack.set_movable(false)
 	CameraTransition.transition_camera(Grabpack.player.camera, camera_3d, 1.0)
 	dooranimation.play("open")
+	gate.opengate()
 
 func start_dino_reveal():
 	pianimation.play("Piano_Reveal")
@@ -54,3 +57,13 @@ func _on_door_animation_finished(anim_name):
 		CameraTransition.transition_camera(camera_3d, Grabpack.player.camera, 1.0)
 	if anim_name == "move":
 		pianimation.play("Piano_PeakThrough")
+
+func _on_battery_linker_batteries_inserted():
+	gate_2.opengate()
+func _on_battery_linker_batteries_taken():
+	gate_2.closegate()
+
+func _on_battery_linker_2_batteries_inserted():
+	gate_3.opengate()
+func _on_battery_linker_2_batteries_taken():
+	gate_3.closegate()

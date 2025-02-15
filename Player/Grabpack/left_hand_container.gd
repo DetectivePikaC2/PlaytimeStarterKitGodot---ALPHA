@@ -35,7 +35,7 @@ func _process(delta):
 	if holding_object:
 		if Input.is_action_pressed("handleft"):
 			hand_hold_time += 1.0 * delta
-			if hand_hold_time > 1.0:
+			if hand_hold_time > 0.5:
 				holding_object = false
 		elif Input.is_action_just_released("handleft"):
 			sort_hand_use()
@@ -72,7 +72,7 @@ func _process(delta):
 			look_at(hand_pos.global_transform.origin)
 			rotation_degrees.y += 180
 			if position.distance_to(hand_fake.global_position) < 0.2:
-				canon_right_animation.play("ShootIn")
+				canon_right_animation.play("ShootOut")
 				hand_motions_animation.play("retract_impact")
 				play_animation("retract")
 				sound_manager.retract_hand()
