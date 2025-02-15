@@ -54,6 +54,3 @@ func _on_door_animation_finished(anim_name):
 		CameraTransition.transition_camera(camera_3d, Grabpack.player.camera, 1.0)
 	if anim_name == "move":
 		pianimation.play("Piano_PeakThrough")
-
-func _on_scanner_linker_scanners_finished():
-	gate.opengate()
