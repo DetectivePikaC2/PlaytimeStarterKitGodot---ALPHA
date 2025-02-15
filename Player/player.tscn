@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=4 uid="uid://dkty77argxwyc"]
+[gd_scene load_steps=152 format=4 uid="uid://dkty77argxwyc"]
 
 [ext_resource type="Texture2D" uid="uid://cl7alwgeec33w" path="res://Player/Grabpack/Models/grabpack_chapter_3_-_poppy_playtime_0.png" id="1_00tjw"]
 [ext_resource type="Script" uid="uid://dkgdss1i1qci7" path="res://Player/player.gd" id="1_od3ui"]
@@ -1722,6 +1722,58 @@ tracks/3/keys = {
 "values": [Vector3(0.875695, -1.07665, -1.11885), Vector3(-0.140533, -0.174606, -0.467222), Vector3(-0.293702, -0.157758, -0.132986), Vector3(-0.169097, -0.107614, -0.00421142), Vector3(0.00212502, -0.0104101, -0.000378676), Vector3(0.0872665, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_f8nak"]
+resource_name = "StartLowered"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LayerWalk/ArmRight/LayerIdle/LayerWalk/LayerCrouch/LayerJump/LayerPack:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.00038898, -0.373903, 0.0858943)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LayerWalk/ArmRight/LayerIdle/LayerWalk/LayerCrouch/LayerJump/LayerPack:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.875695, -1.07665, -1.11885)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LayerWalk/ArmLeft/LayerIdle/LayerWalk/LayerCrouch/LayerJump/LayerPack:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.374, -0.086)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LayerWalk/ArmLeft/LayerIdle/LayerWalk/LayerCrouch/LayerJump/LayerPack:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.875695, -1.07665, -1.11885)]
+}
+
 [sub_resource type="Animation" id="Animation_3bga3"]
 resource_name = "SwitchGrabpackLowerRaise"
 length = 1.3
@@ -1816,6 +1868,7 @@ _data = {
 &"LowerPack": SubResource("Animation_o28un"),
 &"RESET": SubResource("Animation_n471f"),
 &"RaisePack": SubResource("Animation_8mwp6"),
+&"StartLowered": SubResource("Animation_f8nak"),
 &"SwitchGrabpackLowerRaise": SubResource("Animation_3bga3")
 }
 

@@ -245,3 +245,7 @@ func play_animation(anim_name: String):
 	if not hand_uses_animations:
 		return
 	hand_animations_node.animation_player.play(anim_name)
+func seek_animation(time: float):
+	if not hand_uses_animations:
+		return
+	hand_animations_node.animation_player.seek(time)

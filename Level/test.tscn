@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://db7hg6cct3iu0"]
+[gd_scene load_steps=56 format=4 uid="uid://db7hg6cct3iu0"]
 
 [ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
 [ext_resource type="Script" uid="uid://dka7ua0ef5uqh" path="res://Level/Scripts/test.gd" id="1_ndeqo"]
@@ -526,9 +526,55 @@ tracks/6/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_crxk8"]
+resource_name = "intro"
+length = 3.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.46667, 2.06667, 2.38685, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-10.85, 0.3, 18), Vector3(-10.85, 0.3, 18), Vector3(-10.85, 0.976216, 18), Vector3(-10.85, 1.232, 18), Vector3(-10.85, 1.69, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 1.3, 1.85791, 2.13333, 2.3, 2.7, 2.83333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.279253, 0, 1.24791), Vector3(-0.331613, 0, 1.24791), Vector3(-0.279253, 0, 1.24791), Vector3(-0.916298, 0, 1.24791), Vector3(-0.925025, 0.1309, 1.22697), Vector3(-1.14145, 0.16057, 1.02974), Vector3(0, 0.0785398, -0.0872665), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.83333, 3.06667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"done_intro"
+}, {
+"args": [],
+"method": &"fr_done_intro"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5gusw"]
 _data = {
 &"RESET": SubResource("Animation_sh2tj"),
+&"intro": SubResource("Animation_crxk8"),
 &"move": SubResource("Animation_5gusw"),
 &"open": SubResource("Animation_bgkgm")
 }
@@ -554,7 +600,9 @@ shadow_enabled = true
 environment = SubResource("Environment_trpv2")
 
 [node name="Player" parent="." instance=ExtResource("1_4sme4")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.5, 0.0999999, -4.2)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -10.8, 0.0999999, 17.6)
+movable = false
+start_lowered = true
 starting_grabpack = 2
 enabled_hands = Array[PackedScene]([ExtResource("3_ndeqo"), ExtResource("4_d204d"), ExtResource("4_bt7lf"), ExtResource("5_381eo"), ExtResource("4_m4k5q")])
 
@@ -627,10 +675,10 @@ allow_battery_removal = true
 transform = Transform3D(1.78814e-07, 0, -1, 0, 1, 0, 1, 0, 1.78814e-07, 12, 3.3, -4.2)
 
 [node name="Door" parent="puzzle" instance=ExtResource("24_ni15x")]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -18.8, 0, 3.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1, 0, 3.6)
 
 [node name="Gate" parent="puzzle" instance=ExtResource("16_x5pb7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 0, -0.7)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 0, -2.2)
 colour = 1
 
 [node name="Gate2" parent="puzzle" instance=ExtResource("16_x5pb7")]
@@ -701,13 +749,13 @@ has_description = true
 description = "An old commercial for Pianosaurus"
 
 [node name="VhsPlayer" parent="items" node_paths=PackedStringArray("tv") instance=ExtResource("12_yi5ob")]
-transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -1.78406, 0.047714, 3.02718)
+transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -17.5841, 0.047714, -0.47282)
 player_color = Color(0, 1, 0, 1)
 vhs_name = "Pianosaurus"
 tv = NodePath("../VhsTV")
 
 [node name="VhsTV" parent="items" instance=ExtResource("13_dnuk6")]
-transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -1.81594, 0.230204, 3.09651)
+transform = Transform3D(-0.908537, 0, 0.417803, 0, 1, 0, -0.417803, 0, -0.908537, -17.6159, 0.230204, -0.40349)
 tv_color = Color(0, 1, 0, 1)
 video = ExtResource("17_bgkgm")
 
@@ -896,23 +944,23 @@ skin = SubResource("Skin_bv0qt")
 [node name="Limón" parent="items" instance=ExtResource("23_bv0qt")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 10.5, 0.3, 0.1)
 
-[node name="piano" type="Node3D" parent="."]
+[node name="cutseen" type="Node3D" parent="."]
 
-[node name="door2" type="Node3D" parent="piano"]
+[node name="door2" type="Node3D" parent="cutseen"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8, 0, -4.8)
 
-[node name="door" type="AnimationPlayer" parent="piano"]
+[node name="door" type="AnimationPlayer" parent="cutseen"]
 libraries = {
 &"": SubResource("AnimationLibrary_5gusw")
 }
 
-[node name="PianoSaurus" parent="piano" instance=ExtResource("18_sh2tj")]
+[node name="PianoSaurus" parent="cutseen" instance=ExtResource("18_sh2tj")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.5, 0, -4)
 
-[node name="Camera3D" type="Camera3D" parent="piano"]
+[node name="Camera3D" type="Camera3D" parent="cutseen"]
 transform = Transform3D(-3.61999e-06, 0, -1, 0, 1, 0, 1, 0, -3.61999e-06, 7.515, 2, -4.5)
 
-[node name="PianoSectionStart" type="AudioStreamPlayer" parent="piano"]
+[node name="PianoSectionStart" type="AudioStreamPlayer" parent="cutseen"]
 stream = ExtResource("20_uqwnt")
 
 [node name="csg" type="NavigationRegion3D" parent="."]
@@ -922,6 +970,11 @@ navigation_mesh = SubResource("NavigationMesh_dasq6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, -1.55, -3.7)
 use_collision = true
 size = Vector3(39.1, 3.2, 14.9)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, -0.05, 11.2)
+use_collision = true
+size = Vector3(2.8, 0.2, 14.9)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="csg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.65, 2.6, -5.05)
@@ -970,9 +1023,14 @@ use_collision = true
 size = Vector3(1, 5, 11)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="csg"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.35, 2.6, 3.65)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.35, 2.6, 3.6)
 use_collision = true
-size = Vector3(0.3, 5, 31.4)
+size = Vector3(0.1, 5, 31.4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="csg/CSGBox3D8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, -1.35, 10.85)
+operation = 2
+size = Vector3(1, 2.5, 1.2)
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="csg"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.75, 2.6, 0.150001)
@@ -1060,4 +1118,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0.7, -35.4)
 [connection signal="batteries_taken" from="puzzle/BatteryLinker" to="." method="_on_battery_linker_batteries_taken"]
 [connection signal="batteries_inserted" from="puzzle/BatteryLinker2" to="." method="_on_battery_linker_2_batteries_inserted"]
 [connection signal="batteries_taken" from="puzzle/BatteryLinker2" to="." method="_on_battery_linker_2_batteries_taken"]
-[connection signal="animation_finished" from="piano/door" to="." method="_on_door_animation_finished"]
+[connection signal="animation_finished" from="cutseen/door" to="." method="_on_door_animation_finished"]

@@ -38,7 +38,7 @@ func _ready():
 	# Reset grabpack
 	if has_node("Pack/GrabpackOne"):
 		$Pack/GrabpackOne.queue_free()
-
+	
 	Inventory.items_Equipment = []
 	for i in player.enabled_hands.size():
 		var hand_instance = player.enabled_hands[i].instantiate()
@@ -56,10 +56,15 @@ func _ready():
 				Inventory.items_Equipment[i].append(description)
 		
 		hand_instance.queue_free()
-
-	set_grabpack(0)
+	
+	queue_grabpack(player.starting_grabpack)
+	set_queued_grabpack()
 	update_grabpack_data()
-	switch_grabpack(player.starting_grabpack)
+	update_grabpack_visibility(true)
+	
+	if player.start_lowered:
+		item_animation.play("StartLowered")
+		grabpack_lowered = true
 
 func _process(delta):
 	rotation.x = lerp_angle(rotation.x, neck.rotation.x, sway_speed * delta)

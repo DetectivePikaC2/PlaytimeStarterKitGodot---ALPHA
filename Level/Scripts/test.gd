@@ -1,20 +1,31 @@
 extends Node3D
 
-@onready var piano_saurus = $piano/PianoSaurus
-@onready var pianimation = $piano/PianoSaurus/pianosaurusmodel/AnimationPlayer
-@onready var dooranimation = $piano/door
-@onready var camera_3d = $piano/Camera3D
-@onready var piano_section_start = $piano/PianoSectionStart
+@onready var piano_saurus = $cutseen/PianoSaurus
+@onready var pianimation = $cutseen/PianoSaurus/pianosaurusmodel/AnimationPlayer
+@onready var dooranimation = $cutseen/door
+@onready var camera_3d = $cutseen/Camera3D
+@onready var piano_section_start = $cutseen/PianoSectionStart
 @onready var ai_folder = $pianoAI
 @onready var piano_start = $pianoAI/PianoStart
 @onready var gate = $puzzle/Gate
 @onready var gate_2 = $puzzle/Gate2
 @onready var gate_3 = $puzzle/Gate3
+@onready var player = $Player
 
 var pianoAI: CharacterBody3D = null
 
 func _ready():
 	pianimation.connect("animation_finished", Callable(pianimation_finished))
+	dooranimation.play("intro")
+	camera_3d.current = true
+	player.visible = false
+
+func done_intro():
+	CameraTransition.transition_camera(camera_3d, Grabpack.player.camera, 0.2)
+	player.visible = true
+func fr_done_intro():
+	Grabpack.raise_grabpack()
+	Grabpack.set_movable(true)
 
 func _on_hand_scanner_left_scan_success():
 	piano_section_start.play()

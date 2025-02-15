@@ -59,6 +59,8 @@ func left_retract():
 	left_hand.retract_hand()
 func animate_left(anim_name: String):
 	left_hand.play_animation(anim_name)
+func left_seek(time: float):
+	left_hand.animation_player.seek(time)
 
 func right_position(new_position: Vector3):
 	right_hand.hand_grab_point = new_position
@@ -83,3 +85,5 @@ func right_retract():
 	right_hand.retract_hand()
 func animate_right(anim_name: String):
 	right_hand.play_animation(anim_name)
+func right_seek(time: float):
+	right_hand.seek_animation(time)

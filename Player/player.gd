@@ -4,7 +4,10 @@ extends CharacterBody3D
 @onready var sound_manager: Node = $SoundManager  # Cache this node reference
 
 @export_category("Settings")
+@export_group("Movement")
+@export var movable: bool = true
 @export_group("Grabpack")
+@export var start_lowered: bool = false
 #0 is no grabpack, and numbers 1 and 2 are grabpack versions 1 and 2.
 @export_range(0, 2) var starting_grabpack: int = 0
 @export var load_previous_player_hands: bool = false
@@ -64,8 +67,6 @@ var wire_2_length:float = 0.0
 var is_sprinting: bool = false
 var is_squeezing: bool = false
 var is_squeeze_hitbox: bool = false
-
-var movable: bool = true
 
 func _ready() -> void:
 	capture_mouse(true)
