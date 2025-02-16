@@ -59,7 +59,9 @@ func _ready():
 	
 	queue_grabpack(player.starting_grabpack)
 	set_queued_grabpack()
+	await get_tree().create_timer(0.1).timeout
 	update_grabpack_data()
+	await get_tree().create_timer(0.1).timeout
 	update_grabpack_visibility(true)
 	
 	if player.start_lowered:

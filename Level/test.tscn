@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://db7hg6cct3iu0"]
+[gd_scene load_steps=64 format=4 uid="uid://db7hg6cct3iu0"]
 
 [ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
 [ext_resource type="Script" uid="uid://dka7ua0ef5uqh" path="res://Level/Scripts/test.gd" id="1_ndeqo"]
@@ -24,9 +24,11 @@
 [ext_resource type="Script" uid="uid://dfqo6wm5ms6dl" path="res://Objects/Gameplay/Puzzles/Battery/Scripts/battery_linker.gd" id="19_3g0sw"]
 [ext_resource type="PackedScene" uid="uid://dyr40ig1p5la1" path="res://Objects/Gameplay/HandFunctions/item_hand.tscn" id="19_cbe6w"]
 [ext_resource type="Material" uid="uid://56ho0nobwxyd" path="res://Objects/Materials/Trims/MetalTrim.tres" id="19_crxk8"]
+[ext_resource type="Script" uid="uid://ckdvdouxaw4it" path="res://Objects/Gameplay/Puzzles/ConnectionComponents/puzzle_gate_linker.gd" id="20_3g0sw"]
 [ext_resource type="Texture2D" uid="uid://d1s8ic6c0c634" path="res://Player/Grabpack/Models/Hands/T_OmniHand_BC.png" id="20_bv0qt"]
 [ext_resource type="AudioStream" uid="uid://7lgjgn0ix3r" path="res://Objects/Characters/TESTpiano/sfx/12_Last_Meal.wav" id="20_uqwnt"]
 [ext_resource type="Texture2D" uid="uid://bsgqx2nu8s7i6" path="res://Player/Grabpack/Models/Hands/T_OmniHand_Nb.png" id="21_ni15x"]
+[ext_resource type="PackedScene" uid="uid://dohfdi3srap8g" path="res://Objects/Gameplay/GrabHandles/grab_handle.tscn" id="21_sshbo"]
 [ext_resource type="Texture2D" uid="uid://cyjvafqliagnq" path="res://Player/Grabpack/Models/Hands/T_OmniHand_ORM.png" id="22_x5pb7"]
 [ext_resource type="PackedScene" uid="uid://c8xb5tk36xptf" path="res://Objects/Gameplay/Extra/limón.tscn" id="23_bv0qt"]
 [ext_resource type="PackedScene" uid="uid://cgfr84c3rrtym" path="res://Objects/Gameplay/Gates/door.tscn" id="24_ni15x"]
@@ -381,7 +383,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1.5, 0, 0.2)]
+"values": [Vector3(1.4, 0, 0.2)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -393,7 +395,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-1.5, 0, 0.2)]
+"values": [Vector3(-1.6, 0, 0.2)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -418,6 +420,51 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_crxk8"]
+resource_name = "intro"
+length = 3.086
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.46667, 2.06667, 2.38685, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-10.85, 0.3, 18), Vector3(-10.85, 0.3, 18), Vector3(-10.85, 0.976216, 18), Vector3(-10.85, 1.232, 18), Vector3(-10.85, 1.69, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 1.3, 1.85791, 2.13333, 2.3, 2.7, 2.83333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.279253, 0, 1.24791), Vector3(-0.331613, 0, 1.24791), Vector3(-0.279253, 0, 1.24791), Vector3(-0.916298, 0, 1.24791), Vector3(-0.925025, 0.1309, 1.22697), Vector3(-1.14145, 0.16057, 1.02974), Vector3(0, 0.0785398, -0.0872665), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.83333, 3.06667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"done_intro"
+}, {
+"args": [],
+"method": &"fr_done_intro"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_5gusw"]
@@ -526,9 +573,9 @@ tracks/6/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_crxk8"]
-resource_name = "intro"
-length = 3.1
+[sub_resource type="Animation" id="Animation_3g0sw"]
+resource_name = "afterintro"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -536,44 +583,28 @@ tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.46667, 2.06667, 2.38685, 2.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-10.85, 0.3, 18), Vector3(-10.85, 0.3, 18), Vector3(-10.85, 0.976216, 18), Vector3(-10.85, 1.232, 18), Vector3(-10.85, 1.69, 18)]
+"values": [Vector3(7.515, 2, -4.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Camera3D:rotation")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.633333, 1.3, 1.85791, 2.13333, 2.3, 2.7, 2.83333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.279253, 0, 1.24791), Vector3(-0.331613, 0, 1.24791), Vector3(-0.279253, 0, 1.24791), Vector3(-0.916298, 0, 1.24791), Vector3(-0.925025, 0.1309, 1.22697), Vector3(-1.14145, 0.16057, 1.02974), Vector3(0, 0.0785398, -0.0872665), Vector3(0, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(2.83333, 3.06667),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"done_intro"
-}, {
-"args": [],
-"method": &"fr_done_intro"
-}]
+"values": [Vector3(0, -1.5708, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5gusw"]
 _data = {
 &"RESET": SubResource("Animation_sh2tj"),
+&"afterintro": SubResource("Animation_3g0sw"),
 &"intro": SubResource("Animation_crxk8"),
 &"move": SubResource("Animation_5gusw"),
 &"open": SubResource("Animation_bgkgm")
@@ -589,8 +620,152 @@ agent_radius = 0.7
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3g0sw"]
+size = Vector3(1.7, 1.1, 5)
+
+[sub_resource type="Animation" id="Animation_sshbo"]
+resource_name = "chase_start"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChaseCam:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 6.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-41.655, 2.1, -35.425), Vector3(-41.655, 2.1, -35.425), Vector3(-41.655, 2.1, -25.745)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChaseCam:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pianosaur:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.36667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-41.8, 0.2, -13.5), Vector3(-41.8, 0.2, -13.5), Vector3(-41.8, 0.2, -18.6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pianosaur:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.36667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0), Vector3(0, -3.14159, 0), Vector3(0, -3.14159, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0333333, 1.66667, 4.43333, 6, 6.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": ["Piano_RunLoop", 1.0],
+"method": &"chase_piano_set_animation"
+}, {
+"args": ["Piano_NewIdle", 1.0],
+"method": &"chase_piano_set_animation"
+}, {
+"args": ["Piano_Roar", 1.0],
+"method": &"chase_piano_set_animation"
+}, {
+"args": [],
+"method": &"chase_cutseen_end1"
+}, {
+"args": [],
+"method": &"chase_cutseen_end2"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xxndu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChaseCam:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-41.655, 2.1, -35.425)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChaseCam:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pianosaur:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-41.8, 0.2, -13.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pianosaur:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_55opj"]
+resource_name = "chase_run"
+length = 10.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxndu"]
+_data = {
+&"RESET": SubResource("Animation_xxndu"),
+&"chase_run": SubResource("Animation_55opj"),
+&"chase_start": SubResource("Animation_sshbo")
+}
+
 [node name="test" type="Node3D"]
 script = ExtResource("1_ndeqo")
+intro_get_up = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -600,9 +775,8 @@ shadow_enabled = true
 environment = SubResource("Environment_trpv2")
 
 [node name="Player" parent="." instance=ExtResource("1_4sme4")]
-transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -10.8, 0.0999999, 17.6)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -42.8, 0.6, -51)
 movable = false
-start_lowered = true
 starting_grabpack = 2
 enabled_hands = Array[PackedScene]([ExtResource("3_ndeqo"), ExtResource("4_d204d"), ExtResource("4_bt7lf"), ExtResource("5_381eo"), ExtResource("4_m4k5q")])
 
@@ -614,7 +788,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 6)
 [node name="SqueezeZone" type="Area3D" parent="squeezezones"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 1.8, -4.4)
 script = ExtResource("5_qsrvc")
-player_camera_angle = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="squeezezones/SqueezeZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, -0.55, 0)
@@ -678,7 +851,11 @@ transform = Transform3D(1.78814e-07, 0, -1, 0, 1, 0, 1, 0, 1.78814e-07, 12, 3.3,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1, 0, 3.6)
 
 [node name="Gate" parent="puzzle" instance=ExtResource("16_x5pb7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 0, -2.2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, 0, -0.4)
+colour = 1
+
+[node name="Gate4" parent="puzzle" instance=ExtResource("16_x5pb7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -40.4, 0.3, -43.9)
 colour = 1
 
 [node name="Gate2" parent="puzzle" instance=ExtResource("16_x5pb7")]
@@ -693,12 +870,12 @@ colour = 1
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.044, 0, -4.3)
 
 [node name="RightGate" type="MeshInstance3D" parent="puzzle/SecureGate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 0.2)
 mesh = SubResource("ArrayMesh_601od")
 skeleton = NodePath("")
 
 [node name="LeftGate" type="MeshInstance3D" parent="puzzle/SecureGate"]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.2)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, 0.2)
 mesh = SubResource("ArrayMesh_601od")
 skeleton = NodePath("")
 
@@ -738,6 +915,23 @@ battery_slots = [NodePath("../BatteryHolder2"), NodePath("../BatteryHolder4")]
 [node name="BatteryLinker2" type="Node" parent="puzzle" node_paths=PackedStringArray("battery_slots")]
 script = ExtResource("19_3g0sw")
 battery_slots = [NodePath("../BatteryHolder"), NodePath("../BatteryHolder3")]
+
+[node name="PuzzleGateLinker" type="Node" parent="puzzle" node_paths=PackedStringArray("connected_gate")]
+script = ExtResource("20_3g0sw")
+connected_gate = NodePath("../Gate2")
+puzzle = NodePath("../BatteryLinker")
+enable_signal = "batteries_inserted"
+disable_signal = "batteries_taken"
+
+[node name="PuzzleGateLinker2" type="Node" parent="puzzle" node_paths=PackedStringArray("connected_gate")]
+script = ExtResource("20_3g0sw")
+connected_gate = NodePath("../Gate3")
+puzzle = NodePath("../BatteryLinker2")
+enable_signal = "batteries_inserted"
+disable_signal = "batteries_taken"
+
+[node name="GrabHandle" parent="puzzle" instance=ExtResource("21_sshbo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -51.8, 5, -51.7)
 
 [node name="items" type="Node3D" parent="."]
 
@@ -1063,9 +1257,29 @@ use_collision = true
 size = Vector3(1.9, 3.5, 2)
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="csg"]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -16.8, 0.15, -42.05)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -18.1, 0.15, -42.05)
 use_collision = true
-size = Vector3(26.2, 0.3, 47.3)
+size = Vector3(26.2, 0.3, 49.9)
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -41.65, 0.15, -22.3524)
+use_collision = true
+size = Vector3(13.5, 0.3, 3.2)
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -44.558, 0.15, -51.7024)
+use_collision = true
+size = Vector3(6, 0.3, 3.0708)
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -58.2674, 0.15, -51.7024)
+use_collision = true
+size = Vector3(6, 0.3, 6.11055)
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -52.0226, 5.05, -51.7024)
+use_collision = true
+size = Vector3(6, 0.3, 18.6)
 
 [node name="CSGBox3D14" type="CSGBox3D" parent="csg"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -10.8, 0.95, -20.1)
@@ -1073,14 +1287,49 @@ use_collision = true
 size = Vector3(0.2, 8.3, 18.1)
 
 [node name="CSGBox3D17" type="CSGBox3D" parent="csg"]
-transform = Transform3D(5.96046e-08, 0, 1, 0, 1, 0, -1, 0, 5.96046e-08, -12.8168, 2.6, -29.1168)
+transform = Transform3D(5.96046e-08, 0, 1, 0, 1, 0, -1, 0, 5.96046e-08, -4.0668, 2.6, -29.1168)
 use_collision = true
-size = Vector3(0.2, 4.8, 4.3)
+size = Vector3(0.2, 4.8, 21.8)
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1, 0, -1.03316e-07, 0, 1, 0, 1.03316e-07, 0, 1, 6.7332, 2.6, -42.1668)
+use_collision = true
+size = Vector3(0.2, 4.8, 26.1)
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1, 0, -1.03316e-07, 0, 1, 0, 1.03316e-07, 0, 1, -40.4668, 2.6, -35.4168)
+use_collision = true
+size = Vector3(0.2, 4.8, 39.6)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="csg/CSGBox3D24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, -6.5)
+operation = 2
+size = Vector3(1, 3.1, 3.2)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="csg"]
+transform = Transform3D(1, 0, -1.03316e-07, 0, 1, 0, 1.03316e-07, 0, 1, -42.9668, 2.6, -32.1668)
+use_collision = true
+size = Vector3(0.2, 4.8, 33.3)
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, -50.9168, 2.6, -54.7668)
+use_collision = true
+size = Vector3(0.2, 4.8, 21)
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="csg"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, -52.1668, 2.6, -48.7668)
+use_collision = true
+size = Vector3(0.2, 4.8, 18.5)
 
 [node name="CSGBox3D18" type="CSGBox3D" parent="csg"]
-transform = Transform3D(5.96046e-08, 0, 1, 0, 1, 0, -1, 0, 5.96046e-08, -20.9168, 2.6, -29.1168)
+transform = Transform3D(5.96046e-08, 0, 1, 0, 1, 0, -1, 0, 5.96046e-08, -29.6168, 2.6, -29.1168)
 use_collision = true
-size = Vector3(0.2, 4.8, 4.3)
+size = Vector3(0.2, 4.8, 21.7)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="csg"]
+transform = Transform3D(5.96046e-08, 0, 1, 0, 1, 0, -1, 0, 5.96046e-08, -16.8668, 2.6, -55.1168)
+use_collision = true
+size = Vector3(0.2, 4.8, 47.4)
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="csg"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 15.65, 2.6, -3.75)
@@ -1112,10 +1361,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9, 0.7, -47.3)
 [node name="Point5" type="Marker3D" parent="pianoAI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0.7, -35.4)
 
+[node name="Chase" type="Node" parent="."]
+
+[node name="Pianosaur" type="Node3D" parent="Chase"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -41.8, 0.2, -13.5)
+
+[node name="EventTrigger" type="Area3D" parent="Chase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5, 1.4, -41.8)
+script = ExtResource("13_5gusw")
+metadata/_custom_type_script = ExtResource("13_5gusw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chase/EventTrigger"]
+shape = SubResource("BoxShape3D_3g0sw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Chase"]
+libraries = {
+&"": SubResource("AnimationLibrary_xxndu")
+}
+
+[node name="ChaseCam" type="Camera3D" parent="Chase"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -41.655, 2.1, -35.425)
+
 [connection signal="triggered" from="squeezezones/EventTrigger2" to="." method="_on_event_trigger_2_triggered"]
 [connection signal="scan_success" from="puzzle/HandScannerLeft" to="." method="_on_hand_scanner_left_scan_success"]
-[connection signal="batteries_inserted" from="puzzle/BatteryLinker" to="." method="_on_battery_linker_batteries_inserted"]
-[connection signal="batteries_taken" from="puzzle/BatteryLinker" to="." method="_on_battery_linker_batteries_taken"]
-[connection signal="batteries_inserted" from="puzzle/BatteryLinker2" to="." method="_on_battery_linker_2_batteries_inserted"]
-[connection signal="batteries_taken" from="puzzle/BatteryLinker2" to="." method="_on_battery_linker_2_batteries_taken"]
 [connection signal="animation_finished" from="cutseen/door" to="." method="_on_door_animation_finished"]
+[connection signal="triggered" from="Chase/EventTrigger" to="." method="_on_event_trigger_triggered"]

@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var intro_get_up: bool = true
+
 @onready var piano_saurus = $cutseen/PianoSaurus
 @onready var pianimation = $cutseen/PianoSaurus/pianosaurusmodel/AnimationPlayer
 @onready var dooranimation = $cutseen/door
@@ -14,11 +16,24 @@ extends Node3D
 
 var pianoAI: CharacterBody3D = null
 
+#ChaseVars:
+@onready var pianosaur = $Chase/Pianosaur
+@onready var chase_animation = $Chase/AnimationPlayer
+@onready var chase_cam = $Chase/ChaseCam
+
+var chase_piano = null
+var chase_piano_animation: AnimationPlayer = null
+
 func _ready():
 	pianimation.connect("animation_finished", Callable(pianimation_finished))
-	dooranimation.play("intro")
-	camera_3d.current = true
-	player.visible = false
+	if intro_get_up:
+		dooranimation.play("intro")
+		dooranimation.queue("afterintro")
+		camera_3d.current = true
+		player.visible = false
+	else:
+		dooranimation.play("afterintro")
+		Grabpack.set_movable(true)
 
 func done_intro():
 	CameraTransition.transition_camera(camera_3d, Grabpack.player.camera, 0.2)
@@ -69,12 +84,29 @@ func _on_door_animation_finished(anim_name):
 	if anim_name == "move":
 		pianimation.play("Piano_PeakThrough")
 
-func _on_battery_linker_batteries_inserted():
-	gate_2.opengate()
-func _on_battery_linker_batteries_taken():
-	gate_2.closegate()
+func chase_cutseen_start():
+	Grabpack.lower_grabpack()
+	Grabpack.set_movable(false)
+	CameraTransition.transition_camera(Grabpack.player.camera, chase_cam, 1.0)
+	chase_animation.play("chase_start")
+func chase_cutseen_end1():
+	CameraTransition.transition_camera(chase_cam, Grabpack.player.camera, 1.0)
+func chase_cutseen_end2():
+	Grabpack.raise_grabpack()
+	Grabpack.set_movable(true)
+	chase_animation.play("chase_run")
+	chase_piano_set_animation("Piano_RunLoop")
 
-func _on_battery_linker_2_batteries_inserted():
-	gate_3.opengate()
-func _on_battery_linker_2_batteries_taken():
-	gate_3.closegate()
+func chase_piano_set_animation(anim_name: String, speed: float = 1.0):
+	chase_piano_animation.play(anim_name)
+	chase_piano_animation.speed_scale = speed
+
+func _on_event_trigger_triggered():
+	var piano_added_node = preload("res://Objects/Characters/TESTpiano/piano_saurus.tscn").instantiate()
+	pianosaur.add_child(piano_added_node)
+	piano_added_node.set_owner(get_tree().edited_scene_root)
+	
+	chase_piano = piano_added_node
+	chase_piano_animation = piano_added_node.get_node("pianosaurusmodel/AnimationPlayer")
+	
+	chase_cutseen_start()

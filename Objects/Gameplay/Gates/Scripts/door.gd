@@ -31,6 +31,28 @@ func toggle():
 		opensound.play()
 	open = !open
 
+func opendoor():
+	if locked:
+		animation_player.play("locked")
+		lockedsound.play()
+		emit_signal("locked_attempt")
+		return
+	if not open:
+		animation_player.play("open")
+		opensound.play()
+		open = true
+
+func closedoor():
+	if locked:
+		animation_player.play("locked")
+		lockedsound.play()
+		emit_signal("locked_attempt")
+		return
+	if open:
+		animation_player.play("close")
+		closesound.play()
+		open = false
+
 func _on_hand_grab_grabbed(_hand):
 	toggle()
 	timer.start()
