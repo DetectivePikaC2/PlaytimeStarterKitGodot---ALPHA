@@ -66,7 +66,7 @@
 [ext_resource type="AudioStream" uid="uid://d1u6111mtf4qu" path="res://Interface/Inventory/Sound/SW_SFX_Closing_Menu.wav" id="63_68syb"]
 [ext_resource type="AudioStream" uid="uid://c7wgcc6jimvtc" path="res://Interface/Inventory/Sound/SW_SFX_Menu_Forward.wav" id="64_x0uyb"]
 [ext_resource type="AudioStream" uid="uid://40v5446yti4l" path="res://Interface/Inventory/Sound/SW_SFX_Inventory_SwitchTabs_01.wav" id="65_68syb"]
-[ext_resource type="Script" uid="uid://ctiwownyjmlkt" path="res://Player/Grabpack/hook_controller.gd" id="67_x0uyb"]
+[ext_resource type="Script" uid="uid://ctiwownyjmlkt" path="res://addons/grappling_hook_3d/src/hook_controller.gd" id="67_x0uyb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eecr6"]
 resource_name = "MI_GrabpackOriginal"
@@ -4920,10 +4920,13 @@ stream = ExtResource("64_x0uyb")
 [node name="Switch" type="AudioStreamPlayer" parent="UI/inventory"]
 stream = ExtResource("65_68syb")
 
-[node name="HookController" type="Node" parent="." node_paths=PackedStringArray("hook_raycast", "player_body")]
+[node name="HookController" type="Node" parent="." node_paths=PackedStringArray("hook_raycast", "player_body", "hook_source")]
 script = ExtResource("67_x0uyb")
 hook_raycast = NodePath("../Neck/RayCast3D")
 player_body = NodePath("..")
+launch_action_name = "handleft"
+retract_action_name = "handleft"
+hook_source = NodePath("")
 
 [connection signal="timeout" from="Grabpack/Pack/LeftHandContainer/Timer" to="Grabpack/Pack/LeftHandContainer" method="retract_hand"]
 [connection signal="timeout" from="Grabpack/Pack/RightHandContainer/Timer" to="Grabpack/Pack/RightHandContainer" method="retract_hand"]

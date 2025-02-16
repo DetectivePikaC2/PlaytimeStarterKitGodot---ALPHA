@@ -50,7 +50,7 @@ shadow_mesh = SubResource("ArrayMesh_l7ovm")
 size = Vector3(0.8, 0.4, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1tfok"]
-size = Vector3(0.9, 0.4, 0.35)
+size = Vector3(1.25, 0.4, 1.05)
 
 [node name="GrabHandle" type="StaticBody3D"]
 script = ExtResource("1_ltuwc")

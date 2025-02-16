@@ -68,6 +68,11 @@ var is_sprinting: bool = false
 var is_squeezing: bool = false
 var is_squeeze_hitbox: bool = false
 
+var swinging = false
+var swinging_point: Vector3 = Vector3.ZERO
+
+@onready var hook_controller: HookController = $HookController
+
 func _ready() -> void:
 	capture_mouse(true)
 	
@@ -125,7 +130,14 @@ func _physics_process(delta: float) -> void:
 		standing_collision.shape.radius = 0.19 if is_squeezing else 0.3
 		is_squeeze_hitbox = is_squeezing
 	
-	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
+	if not swinging: velocity = _walk(delta) + _gravity(delta) + _jump(delta)
+	elif is_on_floor(): velocity = _walk(delta) + _gravity(delta) + _jump(delta)
+	
+	else: 
+		jump_vel = velocity
+		jump_vel.y = velocity.y * 1.5
+		if jump_vel.y > 9.0:
+			jump_vel.y = 9.0
 	
 	if not left_hand.hand_attached or not right_hand.hand_attached:
 		# Simulate the new position
