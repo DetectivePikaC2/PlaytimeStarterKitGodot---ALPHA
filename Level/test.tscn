@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://db7hg6cct3iu0"]
+[gd_scene load_steps=66 format=4 uid="uid://db7hg6cct3iu0"]
 
 [ext_resource type="PackedScene" uid="uid://dkty77argxwyc" path="res://Player/player.tscn" id="1_4sme4"]
 [ext_resource type="Script" uid="uid://dka7ua0ef5uqh" path="res://Level/Scripts/test.gd" id="1_ndeqo"]
@@ -32,6 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://cyjvafqliagnq" path="res://Player/Grabpack/Models/Hands/T_OmniHand_ORM.png" id="22_x5pb7"]
 [ext_resource type="PackedScene" uid="uid://c8xb5tk36xptf" path="res://Objects/Gameplay/Extra/limón.tscn" id="23_bv0qt"]
 [ext_resource type="PackedScene" uid="uid://cgfr84c3rrtym" path="res://Objects/Gameplay/Gates/door.tscn" id="24_ni15x"]
+[ext_resource type="AudioStream" uid="uid://dulxewt3uawjo" path="res://Level/Music/SW_MUS_AlwaysHurtBack_In.wav" id="33_xxndu"]
+[ext_resource type="AudioStream" uid="uid://broka0uqefy6t" path="res://Level/Music/SW_MUS_AlwaysHurtBack_Loop_01.wav" id="34_55opj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_efwbx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -635,7 +637,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-41.655, 2.1, -35.425)]
+"values": [Vector3(-41.655, 2.1, -25.745)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -673,14 +675,50 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0, -3.14159, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MusicIn:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_55opj"]
 resource_name = "chase_run"
 length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pianosaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-41.8, 0.2, -13.5), Vector3(-41.8, 0.2, -49.2), Vector3(-43.8, 0.2, -51.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pianosaur:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 4.23333, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0), Vector3(0, -3.14159, 0), Vector3(0, -1.96349, 0), Vector3(0, -1.57079, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_sshbo"]
 resource_name = "chase_start"
-length = 7.0
+length = 7.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -691,7 +729,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 6.03333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-41.655, 2.1, -35.425), Vector3(-41.655, 2.1, -35.425), Vector3(-41.655, 2.1, -25.745)]
+"values": [Vector3(-41.655, 2.1, -25.745), Vector3(-41.655, 2.1, -25.745), Vector3(-41.655, 2.1, -35.425)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -700,10 +738,10 @@ tracks/1/path = NodePath("ChaseCam:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1, 6.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 0)]
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -736,7 +774,7 @@ tracks/4/path = NodePath("..")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.0333333, 1.66667, 4.43333, 6, 6.96667),
+"times": PackedFloat32Array(0.0333333, 1.26667, 4.43333, 6, 6.96667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
 "args": ["Piano_RunLoop", 1.0],
@@ -753,6 +791,32 @@ tracks/4/keys = {
 }, {
 "args": [],
 "method": &"chase_cutseen_end2"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MusicIn:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4.03333, 4.06667, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MusicLoop")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(6.96667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -1280,7 +1344,7 @@ use_collision = true
 size = Vector3(6, 4.4, 8.7)
 
 [node name="CSGBox3D32" type="CSGBox3D" parent="csg"]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -89.8727, 0.15, -51.7024)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -89.0727, 0.15, -51.7024)
 use_collision = true
 size = Vector3(6, 0.3, 8.7)
 
@@ -1388,10 +1452,16 @@ libraries = {
 }
 
 [node name="ChaseCam" type="Camera3D" parent="Chase"]
-transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, -41.655, 2.1, -35.425)
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, -41.655, 2.1, -25.745)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Chase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 4.6, -52.2)
+
+[node name="MusicIn" type="AudioStreamPlayer" parent="Chase"]
+stream = ExtResource("33_xxndu")
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="Chase"]
+stream = ExtResource("34_55opj")
 
 [connection signal="triggered" from="squeezezones/EventTrigger2" to="." method="_on_event_trigger_2_triggered"]
 [connection signal="scan_success" from="puzzle/HandScannerLeft" to="." method="_on_hand_scanner_left_scan_success"]
