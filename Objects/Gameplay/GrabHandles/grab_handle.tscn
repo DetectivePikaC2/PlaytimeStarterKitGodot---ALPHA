@@ -53,6 +53,7 @@ size = Vector3(0.8, 0.4, 0.5)
 size = Vector3(1.25, 0.4, 1.05)
 
 [node name="GrabHandle" type="StaticBody3D"]
+process_priority = -15
 script = ExtResource("1_ltuwc")
 
 [node name="SM_GrapHandle" type="MeshInstance3D" parent="."]
@@ -77,5 +78,9 @@ shape = SubResource("BoxShape3D_1tfok")
 
 [node name="HandPositionMarker" type="Marker3D" parent="HandGrab"]
 
+[node name="PullMark" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, 0)
+
 [connection signal="grabbed" from="HandGrab" to="." method="_on_hand_grab_grabbed"]
 [connection signal="let_go" from="HandGrab" to="." method="_on_hand_grab_let_go"]
+[connection signal="pulled" from="HandGrab" to="." method="_on_hand_grab_pulled"]

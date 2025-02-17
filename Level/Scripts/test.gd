@@ -101,7 +101,13 @@ func chase_cutseen_end2():
 
 func chase_piano_set_animation(anim_name: String, speed: float = 1.0):
 	chase_piano_animation.play(anim_name)
+	if 0 == 5:
+		chase_piano_animation.speed_scale = speed
+func chase_piano_set_speed(speed: float = 1.0):
 	chase_piano_animation.speed_scale = speed
+func chase_event_speed(speed: float = 1.0):
+	chase_piano_animation.speed_scale = speed
+	chase_animation.speed_scale = speed
 
 func _on_event_trigger_triggered():
 	var piano_added_node = preload("res://Objects/Characters/TESTpiano/piano_saurus.tscn").instantiate()

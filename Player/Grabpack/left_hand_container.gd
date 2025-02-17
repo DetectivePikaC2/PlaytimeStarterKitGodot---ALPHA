@@ -24,6 +24,7 @@ var hand_grab_point: Vector3 = Vector3.ZERO
 var quick_retract: bool = true
 var holding_object: bool = false
 var hand_hold_time: float = 0.0
+var pulling: bool = false
 
 var retract_type = false
 var hand_speed: float = 35.0
@@ -44,6 +45,10 @@ func _process(delta):
 		hand_hold_time = 0.0
 		if Input.is_action_just_pressed("handleft"):
 			sort_hand_use()
+		elif Input.is_action_just_released("handleft"):
+			if pulling:
+				retract_hand()
+				pulling = false
 	
 	if hand_attached:
 		global_transform = hand_pos.global_transform
@@ -86,7 +91,12 @@ func sort_hand_use():
 	if hand_attached:
 		launch_hand()
 	elif not hand_retracting:
-		retract_hand()
+		if holding_object:
+			retract_hand()
+		else:
+			if not pulling:
+				pulling = true
+				sound_manager.cable_sound(false, true)
 func launch_hand():
 	if not grabpack.grabpack_usable:
 		return

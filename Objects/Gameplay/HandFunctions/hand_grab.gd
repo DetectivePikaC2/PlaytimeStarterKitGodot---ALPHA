@@ -31,14 +31,14 @@ func _process(_delta):
 		if grabbed_left:
 			if update_every_frame:
 				update_hand_position(false)
-			if Input.is_action_pressed("handleft") and not pulling_left:
-				emit_signal("pulled")
+			if Grabpack.left_hand.pulling and not pulling_left:
+				pulled.emit(false)
 				pulling_left = true
 		if grabbed_right:
 			if update_every_frame:
 				update_hand_position(true)
-			if Input.is_action_pressed("handright") and not pulling_right:
-				emit_signal("pulled")
+			if Grabpack.right_hand.pulling and not pulling_right:
+				pulled.emit(true)
 				pulling_right = true
 
 func hand_grabbed(area):
