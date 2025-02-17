@@ -20,9 +20,13 @@ var pianoAI: CharacterBody3D = null
 @onready var pianosaur = $Chase/Pianosaur
 @onready var chase_animation = $Chase/AnimationPlayer
 @onready var chase_cam = $Chase/ChaseCam
+@onready var gate_5 = $puzzle/Gate5
+@onready var music_loop = $Chase/MusicLoop
+@onready var music_out = $Chase/MusicOut
 
 var chase_piano = null
 var chase_piano_animation: AnimationPlayer = null
+var paused: bool = false
 
 func _ready():
 	pianimation.connect("animation_finished", Callable(pianimation_finished))
@@ -103,11 +107,20 @@ func chase_piano_set_animation(anim_name: String, speed: float = 1.0):
 	chase_piano_animation.play(anim_name)
 	if 0 == 5:
 		chase_piano_animation.speed_scale = speed
+func chase_piano_set_animation_blend(anim_name: String, blend):
+	chase_piano_animation.play(anim_name, blend)
 func chase_piano_set_speed(speed: float = 1.0):
 	chase_piano_animation.speed_scale = speed
 func chase_event_speed(speed: float = 1.0):
 	chase_piano_animation.speed_scale = speed
 	chase_animation.speed_scale = speed
+func chase_pause():
+	if not paused:
+		chase_animation.pause()
+		paused = true
+func chase_start(anim: String, point: float):
+	chase_animation.play(anim)
+	chase_animation.seek(point)
 
 func _on_event_trigger_triggered():
 	var piano_added_node = preload("res://Objects/Characters/TESTpiano/piano_saurus.tscn").instantiate()
@@ -118,3 +131,24 @@ func _on_event_trigger_triggered():
 	chase_piano_animation = piano_added_node.get_node("pianosaurusmodel/AnimationPlayer")
 	
 	chase_cutseen_start()
+
+func chase_part2():
+	if paused:
+		chase_start("chase_run", 16.6)
+	else:
+		paused = true
+func chase_end():
+	chase_start("chase_end", 0.0)
+func chase_end_check():
+	if gate_5.open:
+		chase_animation.stop()
+		Grabpack.kill_player()
+	else:
+		return
+
+func chase_music_out():
+	music_loop.stop()
+	music_out.play()
+
+func _on_gate_6_closed():
+	chase_piano.queue_free()

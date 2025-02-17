@@ -134,7 +134,7 @@ func _input(event: InputEvent) -> void:
 			if event.keycode >= KEY_0 and event.keycode <= KEY_9:
 				var switch_num: int = -1
 				switch_num = event.keycode - KEY_0 # Convert keycode to number
-				switch_hand(1, switch_num)
+				switch_hand(1, switch_num-1)
 
 func sort_hand_use():
 	if not hand_useless:
