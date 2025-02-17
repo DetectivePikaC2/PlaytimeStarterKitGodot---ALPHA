@@ -96,6 +96,8 @@ func chase_cutseen_end2():
 	Grabpack.set_movable(true)
 	chase_animation.play("chase_run")
 	chase_piano_set_animation("Piano_RunLoop")
+	
+	Game.set_objective("Run!")
 
 func chase_piano_set_animation(anim_name: String, speed: float = 1.0):
 	chase_piano_animation.play(anim_name)
