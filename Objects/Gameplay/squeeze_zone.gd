@@ -1,4 +1,6 @@
+@tool
 extends Area3D
+class_name SidleZone
 
 @export var player_camera_angle: float = 0.0
 
@@ -47,6 +49,18 @@ func _process(delta):
 			player.camera_movable = true
 			player.neck.rotation.y = clamp(player.neck.rotation.y, angle2, angle1)
 			player.neck.rotation.x = clamp(player.neck.rotation.x, -0.5, 0.5)
+
+func _enter_tree():
+	if get_child_count() < 1:
+		var new_collision = CollisionShape3D.new()
+		new_collision.name = "CollisionShape3D"
+		add_child(new_collision)
+		new_collision.owner = get_tree().edited_scene_root
+		var new_timer = Timer.new()
+		new_timer.name = "Timer"
+		new_timer.wait_time = 1.0
+		add_child(new_timer)
+		new_timer.owner = get_tree().edited_scene_root
 
 func lerp_clamp(value1: float, clamp1: float, clamp2: float, clamp_speed: float):
 	return value1 + (clampf(value1, clamp1, clamp2) - value1) * clamp_speed

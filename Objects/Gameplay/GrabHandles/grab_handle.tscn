@@ -50,7 +50,7 @@ shadow_mesh = SubResource("ArrayMesh_l7ovm")
 size = Vector3(0.8, 0.4, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1tfok"]
-size = Vector3(1.25, 0.4, 1.05)
+size = Vector3(1.25, 0.73125, 1.05)
 
 [node name="GrabHandle" type="StaticBody3D"]
 process_priority = -15
@@ -73,7 +73,7 @@ grab_marker = NodePath("HandPositionMarker")
 metadata/_custom_type_script = ExtResource("5_1tfok")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165625, 0)
 shape = SubResource("BoxShape3D_1tfok")
 
 [node name="HandPositionMarker" type="Marker3D" parent="HandGrab"]
