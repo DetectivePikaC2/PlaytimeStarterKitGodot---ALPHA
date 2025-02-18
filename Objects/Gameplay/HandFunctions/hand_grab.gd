@@ -2,6 +2,12 @@
 extends Area3D
 class_name HandGrab
 
+enum hands {
+	Both,
+	Left,
+	Right
+}
+
 @export var enabled: bool = true
 @export var update_every_frame: bool = false
 @export var affect_position: bool = true
@@ -9,6 +15,7 @@ class_name HandGrab
 @export var stop_hand: bool = true
 @export var grab_animation: String = "normal"
 @export var grab_marker: Marker3D
+@export var only_usable_by: hands = hands.Both
 
 signal grabbed(hand: bool)
 signal pulled(hand: bool)
@@ -22,9 +29,17 @@ var pulling_right: bool = false
 var grabL: bool = false
 var grabR: bool = false
 
+var both_hand: bool = true
+var only_hand: bool = false
+
 func _ready():
 	connect("area_entered", Callable(hand_grabbed))
 	connect("area_exited", Callable(hand_released))
+	if only_usable_by == hands.Both:
+		both_hand = true
+	else:
+		both_hand = false
+		only_hand = only_usable_by == hands.Right
 
 func _process(_delta):
 	if enabled and not Engine.is_editor_hint():
@@ -43,22 +58,22 @@ func _process(_delta):
 
 func hand_grabbed(area):
 	if enabled:
-		if area.is_in_group("LeftHandArea") and not Grabpack.left_hand.hand_attached:
+		if area.is_in_group("LeftHandArea") and not Grabpack.left_hand.hand_attached and (both_hand or not only_hand):
 			update_hand_position(false)
 			emit_signal("grabbed", false)
 			grabL = true
-		elif area.is_in_group("RightHandArea") and not Grabpack.right_hand.hand_attached:
+		elif area.is_in_group("RightHandArea") and not Grabpack.right_hand.hand_attached and (both_hand or only_hand):
 			update_hand_position(true)
 			emit_signal("grabbed", true)
 			grabR = true
 func hand_released(area):
 	if enabled:
-		if area.is_in_group("LeftHandArea") and grabL:
+		if area.is_in_group("LeftHandArea") and grabL and (both_hand or not only_hand):
 			grabbed_left = false
 			pulling_left = false
 			emit_signal("let_go", false)
 			grabL = false
-		elif area.is_in_group("RightHandArea") and grabR:
+		elif area.is_in_group("RightHandArea") and grabR and (both_hand or only_hand):
 			grabbed_right = false
 			pulling_right = false
 			emit_signal("let_go", true)
