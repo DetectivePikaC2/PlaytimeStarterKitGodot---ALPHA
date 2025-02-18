@@ -1,0 +1,13 @@
+[gd_resource type="ORMMaterial3D" load_steps=4 format=3 uid="uid://juikhvsc1mo4"]
+
+[ext_resource type="Texture2D" uid="uid://b482iqfy4gkw8" path="res://Objects/Materials/Tilable/Metal/T_MetalSheet_A_BC.png" id="1_wwxkf"]
+[ext_resource type="Texture2D" uid="uid://m30ew7c3dwe5" path="res://Objects/Materials/Tilable/Metal/T_MetalSheet_A_N.png" id="2_cr2q3"]
+[ext_resource type="Texture2D" uid="uid://cosarxyi8bsxj" path="res://Objects/Materials/Tilable/Metal/T_MetalSheet_A_ORMH.png" id="3_85vfj"]
+
+[resource]
+albedo_texture = ExtResource("1_wwxkf")
+orm_texture = ExtResource("3_85vfj")
+normal_enabled = true
+normal_texture = ExtResource("2_cr2q3")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true

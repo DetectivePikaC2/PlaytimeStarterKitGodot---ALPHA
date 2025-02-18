@@ -1,0 +1,14 @@
+[gd_resource type="ORMMaterial3D" load_steps=4 format=3 uid="uid://bqepd3lp48ttm"]
+
+[ext_resource type="Texture2D" uid="uid://boe6mlkbsi3mt" path="res://Objects/Materials/Tilable/Metal/T_MetalPanels_A_BC.png" id="1_ubeov"]
+[ext_resource type="Texture2D" uid="uid://ca6bekjxkmfh1" path="res://Objects/Materials/Tilable/Metal/T_MetalPanels_A_N.png" id="2_ehlhf"]
+[ext_resource type="Texture2D" uid="uid://qyl1utgdy20e" path="res://Objects/Materials/Tilable/Metal/T_MetalPanels_A_ORMH.png" id="3_x7ujb"]
+
+[resource]
+albedo_color = Color(1, 0.95816, 0.875596, 1)
+albedo_texture = ExtResource("1_ubeov")
+orm_texture = ExtResource("3_x7ujb")
+normal_enabled = true
+normal_texture = ExtResource("2_ehlhf")
+uv1_scale = Vector3(0.365, 0.365, 0.365)
+uv1_triplanar = true

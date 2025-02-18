@@ -36,6 +36,7 @@ settings/stdout/print_fps=true
 window/size/initial_position_type=2
 window/size/initial_screen=1
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://cxmgy7tkocyup"
 
 [dotnet]
 

@@ -1,0 +1,702 @@
+[gd_scene load_steps=35 format=3 uid="uid://dtp3lixj6uyxo"]
+
+[ext_resource type="Texture2D" uid="uid://dtt5yq2kte11u" path="res://TEMP/logo.png" id="1_bulru"]
+[ext_resource type="Script" uid="uid://id7iagt8fncx" path="res://Interface/MainMenu/Scripts/title_screen.gd" id="1_dj2vu"]
+[ext_resource type="FontFile" uid="uid://dp3oq0ou16joq" path="res://Interface/Font/VCR_OSD_MONO_1.001.ttf" id="2_dj2vu"]
+[ext_resource type="Script" uid="uid://dxaer0i0hovev" path="res://Interface/MainMenu/Scripts/before_intro_screens.gd" id="2_s6w10"]
+[ext_resource type="Script" uid="uid://qe5ttrlwg8gk" path="res://Interface/MainMenu/Scripts/title_intro.gd" id="4_psfkv"]
+[ext_resource type="Texture2D" uid="uid://d0emq4bgu0a6h" path="res://logo_image.png" id="5_2834n"]
+[ext_resource type="AudioStream" uid="uid://c33jjw1eus4pc" path="res://Interface/MainMenu/Sound/SW_SFX_TitleScreen_PressAnyButton.wav" id="7_fg6rl"]
+[ext_resource type="FontFile" uid="uid://cfvfiw1qtrep1" path="res://Interface/Font/OverusedGrotesk-Bold.otf" id="7_sn61t"]
+[ext_resource type="VideoStream" uid="uid://cgw26qs3lxwyr" path="res://Interface/MainMenu/Texture/PPC4_Main_Menu_Background.ogv" id="8_61gjo"]
+[ext_resource type="FontFile" uid="uid://d02qiqkper325" path="res://Interface/Font/OverusedGrotesk-Medium.otf" id="8_s7yi2"]
+[ext_resource type="Theme" uid="uid://c3y4p2f8djdyb" path="res://Interface/MainMenu/Themes/title_button.tres" id="9_2653s"]
+[ext_resource type="Script" uid="uid://dt636jiq7je6r" path="res://Interface/MainMenu/Scripts/menu_button.gd" id="10_2653s"]
+[ext_resource type="Script" uid="uid://d02ndr1cfnfix" path="res://Interface/MainMenu/Sound/buttonSFX.gd" id="12_6wysa"]
+[ext_resource type="Texture2D" uid="uid://d3v4cn4eq2qqr" path="res://TEMP/popup.png" id="12_wi7c2"]
+[ext_resource type="Script" uid="uid://cram086kryr7c" path="res://Interface/MainMenu/Scripts/menu_popup.gd" id="13_txout"]
+[ext_resource type="Texture2D" uid="uid://ba641twe6vsbv" path="res://Interface/MainMenu/Texture/T_PauseBG.png" id="13_wi7c2"]
+[ext_resource type="Theme" uid="uid://bsmuhrjx0b4k2" path="res://Interface/MainMenu/Themes/prompt_button.tres" id="14_fi64f"]
+[ext_resource type="AudioStream" uid="uid://ilcdsxfj7o2g" path="res://Interface/MainMenu/Music/ch4TitleMusic.mp3" id="16_xtj4b"]
+
+[sub_resource type="Animation" id="Animation_ety4h"]
+resource_name = "Delay"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"load_next"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sn61t"]
+_data = {
+&"Delay": SubResource("Animation_ety4h")
+}
+
+[sub_resource type="Animation" id="Animation_psfkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s6w10"]
+resource_name = "loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressLabel:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sn61t"]
+resource_name = "pressed"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressLabel:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ety4h"]
+_data = {
+&"RESET": SubResource("Animation_psfkv"),
+&"loop": SubResource("Animation_s6w10"),
+&"pressed": SubResource("Animation_sn61t")
+}
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_s7yi2"]
+color = Color(0.411765, 0.858824, 1, 1)
+thickness = 2
+
+[sub_resource type="FontVariation" id="FontVariation_mh3bh"]
+base_font = ExtResource("8_s7yi2")
+spacing_bottom = -5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi64f"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.417257, 0.417257, 0.417257, 1)
+
+[sub_resource type="Animation" id="Animation_txout"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fi64f"]
+resource_name = "fadein"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xtj4b"]
+resource_name = "fadeout"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61gjo"]
+_data = {
+&"RESET": SubResource("Animation_txout"),
+&"fadein": SubResource("Animation_fi64f"),
+&"fadeout": SubResource("Animation_xtj4b")
+}
+
+[sub_resource type="Animation" id="Animation_dj2vu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bulru"]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s6w10"]
+_data = {
+&"RESET": SubResource("Animation_dj2vu"),
+&"transition": SubResource("Animation_bulru")
+}
+
+[node name="title_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dj2vu")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Base" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 308.5)
+scale = Vector2(0.72, 0.756667)
+texture = ExtResource("12_wi7c2")
+
+[node name="BeforeIntroScreens" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_s6w10")
+screens = Array[NodePath]([NodePath("PlaytimeStarter"), NodePath("Warning")])
+
+[node name="PlaytimeStarter" type="Node2D" parent="BeforeIntroScreens"]
+visible = false
+
+[node name="WarningTitle" type="Label" parent="BeforeIntroScreens/PlaytimeStarter"]
+offset_left = 23.0
+offset_top = 17.0
+offset_right = 1129.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0.411765, 0.858824, 1, 1)
+theme_override_fonts/font = ExtResource("2_dj2vu")
+theme_override_font_sizes/font_size = 71
+text = "THIS FANGAME WAS MADE WITH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WarningText" type="Label" parent="BeforeIntroScreens/PlaytimeStarter"]
+offset_left = 77.0
+offset_top = 585.0
+offset_right = 1077.0
+offset_bottom = 621.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_dj2vu")
+theme_override_font_sizes/font_size = 36
+text = "By @DetectivePikaC2 / Derective on Youtube..."
+horizontal_alignment = 1
+
+[node name="LogoImage" type="Sprite2D" parent="BeforeIntroScreens/PlaytimeStarter"]
+position = Vector2(574, 370.5)
+scale = Vector2(0.601563, 0.626389)
+texture = ExtResource("5_2834n")
+
+[node name="Warning" type="Node2D" parent="BeforeIntroScreens"]
+visible = false
+
+[node name="WarningTitle" type="Label" parent="BeforeIntroScreens/Warning"]
+offset_left = 264.0
+offset_top = 83.0
+offset_right = 888.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.411765, 0.858824, 1, 1)
+theme_override_fonts/font = ExtResource("2_dj2vu")
+theme_override_font_sizes/font_size = 96
+text = "WARNING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WarningText" type="Label" parent="BeforeIntroScreens/Warning"]
+offset_left = 134.0
+offset_top = 199.0
+offset_right = 1018.0
+offset_bottom = 541.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_dj2vu")
+theme_override_font_sizes/font_size = 36
+text = "You have been warned :O"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="BeforeIntroScreens"]
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BeforeIntroScreens"]
+libraries = {
+&"": SubResource("AnimationLibrary_sn61t")
+}
+
+[node name="title_intro" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_psfkv")
+
+[node name="NameAnimation" type="AnimationPlayer" parent="title_intro"]
+libraries = {
+&"": SubResource("AnimationLibrary_ety4h")
+}
+playback_default_blend_time = 0.5
+
+[node name="Logo" type="Sprite2D" parent="title_intro"]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(0.600626, 0.600556)
+texture = ExtResource("1_bulru")
+
+[node name="PressLabel" type="Label" parent="title_intro"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 456.0
+offset_top = 391.0
+offset_right = -456.0
+offset_bottom = -213.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_dj2vu")
+theme_override_font_sizes/font_size = 24
+text = "Press Any Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="StudioName" type="Label" parent="title_intro"]
+modulate = Color(1, 1, 1, 0.54902)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 456.0
+offset_top = 591.0
+offset_right = -456.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "©️2025 Your Name Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="GameLogo" type="Node2D" parent="title_intro"]
+position = Vector2(576, 253)
+
+[node name="LOGOTEMP" type="Label" parent="title_intro/GameLogo"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -276.0
+offset_top = -102.0
+offset_right = 276.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_dj2vu")
+theme_override_font_sizes/font_size = 49
+text = "FANGAME
+ LOGO 
+HERE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="menu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pressed" type="AudioStreamPlayer" parent="menu"]
+stream = ExtResource("7_fg6rl")
+
+[node name="RenderBG" type="VideoStreamPlayer" parent="menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("8_61gjo")
+expand = true
+loop = true
+
+[node name="Chapter" type="Label" parent="menu"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 54.0
+offset_right = 426.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("7_sn61t")
+theme_override_font_sizes/font_size = 22
+text = "Chapter 4"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Title" type="Label" parent="menu"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 71.0
+offset_right = 445.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0.411765, 0.858824, 1, 1)
+theme_override_fonts/font = ExtResource("7_sn61t")
+theme_override_font_sizes/font_size = 60
+text = "Safe Haven"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+
+[node name="Seperator" type="HSeparator" parent="menu"]
+layout_mode = 0
+offset_top = 145.0
+offset_right = 442.0
+offset_bottom = 151.0
+theme_override_styles/separator = SubResource("StyleBoxLine_s7yi2")
+
+[node name="Description" type="Label" parent="menu"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 169.0
+offset_right = 438.0
+offset_bottom = 240.0
+theme_override_fonts/font = SubResource("FontVariation_mh3bh")
+theme_override_font_sizes/font_size = 14
+text = "Further into a hell of Playtime's making, you enact
+Poppy's plan for revenge against the Prototype..."
+
+[node name="Buttons" type="Node2D" parent="menu"]
+
+[node name="Continue" type="Button" parent="menu/Buttons"]
+visible = false
+offset_left = 129.0
+offset_top = 364.0
+offset_right = 384.0
+offset_bottom = 398.0
+theme = ExtResource("9_2653s")
+text = "CONTINUE"
+alignment = 0
+script = ExtResource("10_2653s")
+
+[node name="New" type="Button" parent="menu/Buttons"]
+offset_left = 129.0
+offset_top = 403.0
+offset_right = 384.0
+offset_bottom = 437.0
+theme = ExtResource("9_2653s")
+text = "NEW GAME"
+alignment = 0
+script = ExtResource("10_2653s")
+
+[node name="Load" type="Button" parent="menu/Buttons"]
+offset_left = 129.0
+offset_top = 440.0
+offset_right = 384.0
+offset_bottom = 474.0
+theme = ExtResource("9_2653s")
+text = "LOAD GAME"
+alignment = 0
+script = ExtResource("10_2653s")
+
+[node name="Settings" type="Button" parent="menu/Buttons"]
+offset_left = 129.0
+offset_top = 479.0
+offset_right = 384.0
+offset_bottom = 513.0
+theme = ExtResource("9_2653s")
+text = "SETTINGS"
+alignment = 0
+script = ExtResource("10_2653s")
+
+[node name="Credits" type="Button" parent="menu/Buttons"]
+offset_left = 129.0
+offset_top = 516.0
+offset_right = 384.0
+offset_bottom = 550.0
+theme = ExtResource("9_2653s")
+text = "CREDITS"
+alignment = 0
+script = ExtResource("10_2653s")
+
+[node name="Quit" type="Button" parent="menu/Buttons"]
+offset_left = 129.0
+offset_top = 554.0
+offset_right = 384.0
+offset_bottom = 588.0
+theme = ExtResource("9_2653s")
+text = "QUIT"
+alignment = 0
+script = ExtResource("10_2653s")
+
+[node name="Current" type="Node2D" parent="menu/Buttons"]
+visible = false
+position = Vector2(99, 479)
+
+[node name="ColorRect" type="ColorRect" parent="menu/Buttons/Current"]
+offset_right = 9.0
+offset_bottom = 35.0
+color = Color(0.411765, 0.858824, 1, 1)
+
+[node name="ButtonSFXPlayer" type="Node" parent="menu"]
+script = ExtResource("12_6wysa")
+root_path = NodePath("../Buttons")
+metadata/_custom_type_script = ExtResource("12_6wysa")
+
+[node name="menu_popup" type="Control" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_txout")
+
+[node name="Background" type="Sprite2D" parent="menu_popup"]
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("13_wi7c2")
+
+[node name="Panel" type="Panel" parent="menu_popup"]
+layout_mode = 0
+offset_top = 228.0
+offset_right = 1152.0
+offset_bottom = 448.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fi64f")
+
+[node name="Prompt" type="Label" parent="menu_popup"]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 255.0
+offset_right = 867.0
+offset_bottom = 287.0
+theme_override_colors/font_color = Color(0.411765, 0.858824, 1, 1)
+theme_override_fonts/font = ExtResource("7_sn61t")
+theme_override_font_sizes/font_size = 23
+text = "EXIT GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="SubPrompt" type="Label" parent="menu_popup"]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 307.0
+offset_right = 950.0
+offset_bottom = 362.0
+theme_override_colors/font_color = Color(0.721859, 0.721859, 0.721859, 1)
+theme_override_fonts/font = SubResource("FontVariation_mh3bh")
+theme_override_font_sizes/font_size = 14
+text = "Are you sure you want to exit the game?"
+horizontal_alignment = 1
+
+[node name="Yes" type="Button" parent="menu_popup"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 377.0
+offset_right = 560.0
+offset_bottom = 423.0
+theme = ExtResource("14_fi64f")
+theme_override_fonts/font = ExtResource("8_s7yi2")
+theme_override_font_sizes/font_size = 20
+text = "YES"
+
+[node name="No" type="Button" parent="menu_popup"]
+layout_mode = 0
+offset_left = 588.0
+offset_top = 377.0
+offset_right = 668.0
+offset_bottom = 423.0
+theme = ExtResource("14_fi64f")
+theme_override_fonts/font = ExtResource("8_s7yi2")
+theme_override_font_sizes/font_size = 20
+text = "NO"
+
+[node name="ButtonSFXPlayer" type="Node" parent="menu_popup"]
+script = ExtResource("12_6wysa")
+root_path = NodePath("..")
+metadata/_custom_type_script = ExtResource("12_6wysa")
+
+[node name="Animation" type="AnimationPlayer" parent="menu_popup"]
+libraries = {
+&"": SubResource("AnimationLibrary_61gjo")
+}
+
+[node name="MenuMusic" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="MenuMusic"]
+stream = ExtResource("16_xtj4b")
+
+[node name="MenuTransition" type="Node2D" parent="."]
+visible = false
+
+[node name="Transition" type="ColorRect" parent="MenuTransition"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuTransition"]
+libraries = {
+&"": SubResource("AnimationLibrary_s6w10")
+}
+
+[connection signal="finshed" from="BeforeIntroScreens" to="." method="screens_finished"]
+[connection signal="timeout" from="BeforeIntroScreens/Timer" to="BeforeIntroScreens" method="screen_timeout"]
+[connection signal="pressed" from="title_intro" to="." method="logo_finished"]
+[connection signal="pressed" from="menu/Buttons/New" to="." method="new_game"]
+[connection signal="pressed" from="menu/Buttons/Quit" to="." method="quit"]
